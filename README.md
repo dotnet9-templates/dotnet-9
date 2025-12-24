@@ -30,6 +30,20 @@ dotnet sln add Persistence/Persistence.csproj
 Then we need to set up the references between the projects...can use GUI on VS Code or in the command line with the command line command dotnet add reference.
 
 - dotnet add API/API.csproj reference Application/Application.csproj
-  Application.csproj needs two references to Domain.csproj and Persistence.csproj.
-  - dotnet add Application/Application.csproj reference Domain/Domain.csproj
-  - dotnet add Application/Application.csproj reference Persistence/Persistence.csproj
+  Application.csproj needs two references to Domain.csproj and Persistence.csproj. - dotnet add Application/Application.csproj reference Domain/Domain.csproj - dotnet add Application/Application.csproj reference Persistence/Persistence.csproj
+
+Persistence.csproj needs a reference to Domain.csproj.
+
+- dotnet add Persistence/Persistence.csproj reference Domain/Domain.csproj
+
+== Starting at Section 2 Part 7. ==
+
+cd API and run the command dotnet run
+be sure the ports are open i.e. info is all green.
+
+Change the API/Properties/launchSettings.json to remove the https only 1 profile is needed.
+changed in launchSettings.json to "applicationUrl": "https://localhost:5001;",
+
+in the API.csproj..optional to remove the Microsoft.AspNetCore.OpenApi package.
+
+API.http file to test the API. We removed it because we're using Postman to test the API.
