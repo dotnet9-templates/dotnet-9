@@ -57,3 +57,11 @@ Make sure you have c# dev kit to create classes easier as a template.
 I changed the model name from Activity to Reactivy.
 
 in the model required keyword is used to ensure that the property is not null. even if the csproj is enabled for nullable...we do not want disabled in csproj.
+
+== Starting at Section 2 Part 9 ==
+
+extension nuget gallery to install packages.
+
+nuget package Microsoft.EntityFrameworkCore.Sqlite install into Persistence. Make sure the version matches the .Net runtime version.
+
+you can check runtime version with the command line command dotnet --info.
