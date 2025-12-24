@@ -51,3 +51,9 @@ API.http file to test the API. We removed it because we're using Postman to test
 The 4 files in this lesson to pay attention to is WeatherForecast.cs, Program.cs, and launchSettings.json, and API.csproj
 
 == Starting at Section 2 Part 8. ==
+
+Make sure you have c# dev kit to create classes easier as a template.
+
+I changed the model name from Activity to Reactivy.
+
+in the model required keyword is used to ensure that the property is not null. even if the csproj is enabled for nullable...we do not want disabled in csproj.
