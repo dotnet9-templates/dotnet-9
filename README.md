@@ -176,4 +176,9 @@ You sould see the db in the API folder.
 
 use dotnet ef database drop -p Persistence -s API to drop the database. as we're taking a different approach to the database. This drops the db in the API folder.
 
-== Starting at Section 2 Part 10 ==
+== Starting at Section 2 Part 11 ==
+
+use the course seed file and copy and paste into the dbInitializer.cs file.
+
+see comments in code. afterwards, run dotnet watch to see the command line in the API folder.
+in the api folder after creation from dotnetwatch you should see the data in the fake database in the API folder.
