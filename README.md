@@ -47,3 +47,7 @@ changed in launchSettings.json to "applicationUrl": "https://localhost:5001;",
 in the API.csproj..optional to remove the Microsoft.AspNetCore.OpenApi package.
 
 API.http file to test the API. We removed it because we're using Postman to test the API.
+
+The 4 files in this lesson to pay attention to is WeatherForecast.cs, Program.cs, and launchSettings.json, and API.csproj
+
+== Starting at Section 2 Part 8. ==
