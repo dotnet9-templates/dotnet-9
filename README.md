@@ -183,6 +183,10 @@ use the course seed file and copy and paste into the dbInitializer.cs file.
 see comments in code. afterwards, run dotnet watch to see the command line in the API folder.
 in the api folder after creation from dotnetwatch you should see the data in the fake database in the API folder.
 
-== Starting at Section 2 Part 11 ==
+== Starting at Section 2 Part 12 ==
 
 color on info doesn't work on dotnet watch. use dotnet run because of .NET 9 updates . . . causes this error.
+
+== Starting at Section 2 Part 13 - 15 SKIPPED ==
+
++++=== STARTING SECTION 3 ===+++
