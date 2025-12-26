@@ -189,4 +189,30 @@ color on info doesn't work on dotnet watch. use dotnet run because of .NET 9 upd
 
 == Starting at Section 2 Part 13 - 15 SKIPPED ==
 
-+++=== STARTING SECTION 3 ===+++
++++=== STARTING SECTION 3 part 17 ===+++
+
+create react project in sln director.
+
+npm create vite@latest
+yes to the question.
+project name client
+framework react
+variant typescript + swc
+
+cd into client folder and run npm install.
+run npm run dev to start the development server.
+
+on mac to upgrade node to latest version, run the command brew update then brew upgrade node. then node --version
+
+OR
+
+just go to the node website and download the latest version.
+
+OR
+
+brew install node@22
+brew upgrade node
+
+OR
+
+troubleshoot on your own.
