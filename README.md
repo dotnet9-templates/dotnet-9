@@ -217,7 +217,7 @@ OR
 
 troubleshoot on your own.
 
-+++=== STARTING SECTION 3 part 18 ===+++
+=== STARTING SECTION 3 part 18 ===
 
 vite.config.ts is the file used for npm run dev.
 
@@ -230,3 +230,72 @@ removed styling from index.css
 just simplfiy.
 
 install extension es7 react/redux/react-native snippets by dsznajder
+
+=== STARTING SECTION 3 part 19 ===
+
+javascript fetch and other examples
+
+=== STARTING SECTION 3 part 20 ===
+in API folder needs to do in command line
+
+# Step 1: Remove old certificates
+
+dotnet dev-certs https --clean
+
+# Step 2: Create and trust a new certificate
+
+dotnet dev-certs https --trust
+
+because chrome . . .
+
+Great question! Let me explain **why** this works:
+
+## The Problem
+
+When you use **HTTPS**, your browser needs to verify the server's identity using an **SSL/TLS certificate**. This prevents man-in-the-middle attacks.
+
+For production websites, certificates come from trusted Certificate Authorities (like Let's Encrypt). But for **localhost development**, .NET creates a **self-signed certificate** - meaning it's not verified by a trusted authority.
+
+**Browsers don't trust self-signed certificates by default** - that's why you got the `ERR_CERT_AUTHORITY_INVALID` error.
+
+## The Solution
+
+### `dotnet dev-certs https --clean`
+
+- Removes old development certificates from:
+  - Your **user certificate store** (~/.dotnet/corefx/cryptography/)
+  - Your **system keychain** (macOS Keychain Access)
+- Useful if certificates got corrupted or expired
+
+### `dotnet dev-certs https --trust`
+
+- Creates a new development certificate
+- **Installs it in your Mac's Keychain** as a trusted root certificate
+- Chrome (and all browsers) check the system keychain
+- When they see the certificate is trusted there, they accept it!
+
+## Why Chrome vs Safari?
+
+- **Safari** is more lenient - clicking "Proceed" in the warning is enough
+- **Chrome** is stricter - it requires certificates to be in the **system keychain** as trusted
+- **Postman** ignores certificate validation entirely in development mode
+
+## The Flow
+
+```
+Your Browser → Makes HTTPS request to localhost:5001
+             ↓
+Server sends → Self-signed certificate
+             ↓
+Browser checks → "Is this in my trusted certificates?"
+             ↓
+System Keychain → "Yes! You ran --trust, so it's here"
+             ↓
+Browser → ✅ Connection allowed
+```
+
+Without `--trust`, the browser says "Not in my trusted list, I'm blocking this!"
+
+That's why the certificate needed to be trusted system-wide for Chrome to work! 🎉
+
+strict mode and use effect will return 2 fetches in the console network. This is by design.

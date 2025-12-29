@@ -10,7 +10,13 @@ builder.Services.AddDbContext<AppDbContext>( options => {
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")); //this is the connection string from the appsettings.json file. to use for the sqlite database.
 });
 
+// Add CORS policy
+builder.Services.AddCors();
+
 var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+app.UseCors( options => options.AllowAnyMethod().AllowAnyHeader().WithOrigins("http://localhost:3001", "https://localhost:3001"));
 
 // app.UseHttpsRedirection();
 

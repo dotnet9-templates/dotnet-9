@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 
 function App() {
-  const [activities, setActivities] = useState([]);
+  const [reactivities, setReactivities] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5001/api/activities")
+    fetch("https://localhost:5001/api/reactivity")
       .then((response) => response.json())
-      .then((data) => setActivities(data));
+      .then((data) => setReactivities(data));
+
+    // cleanup function
+    return () => {};
   }, []);
 
   return (
@@ -15,8 +18,8 @@ function App() {
         Dotnet-9
       </h3>
       <ul>
-        {activities.map((activity) => (
-          <li key={activity.id}>{activity.title}</li>
+        {reactivities.map((reactivity) => (
+          <li key={reactivity.reactivityId}>{reactivity.title}</li>
         ))}
       </ul>
     </div>
