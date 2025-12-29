@@ -216,3 +216,17 @@ brew upgrade node
 OR
 
 troubleshoot on your own.
+
++++=== STARTING SECTION 3 part 18 ===+++
+
+vite.config.ts is the file used for npm run dev.
+
+Check package.json to make sure the dependences for react and react-dom are installed the right verision by hovering over the dependencies. then be sure you're in the client folder and re-run npm install for the correct version.
+
+change index.html title to dotnet-9
+change the App.tsx
+removed styling from index.css
+
+just simplfiy.
+
+install extension es7 react/redux/react-native snippets by dsznajder
