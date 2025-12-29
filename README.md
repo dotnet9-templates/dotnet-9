@@ -352,3 +352,31 @@ OLD is below if you want to use it
 This is for styling the app....can use the oldest if want the exact same styling.
 
 Setting > Link Editing and turn on. To make sure tags are linked correctly..
+
+=== STARTING SECTION 3 part 24 ===
+
+running client app in https isn't required. publishing will be on https...might as well keep it as close to production as possible.
+
+in client run npm install -D vite-plugin-mkcert for local certificate authority. Just for your browser to trust the certificate.
+
+MKCERT will ask you to trust the certificate via password on npm run dev
+jacobreola@MacBook-Pro-04 client % npm run dev
+
+> client@0.0.0 dev
+> vite
+
+Sudo password:
+The list of generated files:
+/Users/jacobreola/.vite-plugin-mkcert/dev.pem
+/Users/jacobreola/.vite-plugin-mkcert/cert.pem
+8:21:30 AM [vite] (client) Re-optimizing dependencies because vite config has changed
+
+VITE v7.3.0 ready in 24825 ms
+
+➜ Local: https://localhost:3001/
+➜ Network: use --host to expose
+➜ press h + enter to show help
+
+This will not work on the internet but it will work on development mode.
+
+=== STARTING SECTION 3 part 25 ===
