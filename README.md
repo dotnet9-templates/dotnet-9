@@ -299,3 +299,16 @@ Without `--trust`, the browser says "Not in my trusted list, I'm blocking this!"
 That's why the certificate needed to be trusted system-wide for Chrome to work! 🎉
 
 strict mode and use effect will return 2 fetches in the console network. This is by design.
+
+=== STARTING SECTION 3 part 21 ===
+get json from console fetch and go to json to typescript
+https://transform.tools/json-to-typescript
+
+TypeScript: interface vs type (concise summary)
+Both interface and type are exportable in TypeScript. There’s no difference in how they’re exported.
+An interface is best for defining object shapes and public/shared models. It can be extended and declaration-merged, which makes it a good default for things like API response models.
+A type is more flexible and is better when you need unions, intersections, or more complex compositions. It cannot be merged.
+For simple object shapes, either works.
+If these definitions are meant to be shared across the app, they can go in index.d.ts. Use exports if they’re imported, or make them global if you want them available without imports.
+TL;DR:
+Use interface for object models, type for complex types. Both are exportable and fine to place in index.d.ts when shared globally.
