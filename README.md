@@ -380,3 +380,6 @@ VITE v7.3.0 ready in 24825 ms
 This will not work on the internet but it will work on development mode.
 
 === STARTING SECTION 3 part 25 ===
+
+Axios
+in client npm install axios
