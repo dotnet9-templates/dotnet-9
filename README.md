@@ -301,6 +301,7 @@ That's why the certificate needed to be trusted system-wide for Chrome to work! 
 strict mode and use effect will return 2 fetches in the console network. This is by design.
 
 === STARTING SECTION 3 part 21 ===
+
 get json from console fetch and go to json to typescript
 https://transform.tools/json-to-typescript
 
@@ -312,3 +313,42 @@ For simple object shapes, either works.
 If these definitions are meant to be shared across the app, they can go in index.d.ts. Use exports if they’re imported, or make them global if you want them available without imports.
 TL;DR:
 Use interface for object models, type for complex types. Both are exportable and fine to place in index.d.ts when shared globally.
+
+=== STARTING SECTION 3 part 22 ===
+
+https://chromewebstore.google.com/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?utm_source=ext_app_menu
+
+react developer tools extension for chrome. pin to toolbar
+
+console site using react will now show components and profiler
+
+=== STARTING SECTION 3 part 23 ===
+
+MUI.com/core -> get started CURRENT VERSION AT THIS POINT IS v7.3.6
+We'll use MUI Design 2 and click on installation getting start and follow....
+
+in terminal npm install @mui/material @emotion/react @emotion/styled IN CLIENT FOLDER.
+
+Use Roboto font. npm install @fontsource/roboto
+then copy the fonts
+
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
+
+then Icons
+npm install @mui/icons-material
+
+Check package.json to make sure the dependencies are installed the right version.
+
+OLD is below if you want to use it
+"@emotion/react": "^11.14.0",
+"@emotion/styled": "^11.14.1",
+"@fontsource/roboto": "^5.1.1",
+"@mui/icons-material": "^6.3.0",
+"@mui/material": "6.3.0",
+
+This is for styling the app....can use the oldest if want the exact same styling.
+
+Setting > Link Editing and turn on. To make sure tags are linked correctly..

@@ -1,3 +1,4 @@
+import { List, ListItem, ListItemText, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 
 function App() {
@@ -13,16 +14,16 @@ function App() {
   }, []);
 
   return (
-    <div>
-      <h3 className="app" style={{ color: "red" }}>
-        Dotnet-9
-      </h3>
-      <ul>
+    <>
+      <Typography variant="h3">Dotnet-9</Typography>
+      <List>
         {reactivities.map((reactivity) => (
-          <li key={reactivity.reactivityId}>{reactivity.title}</li>
+          <ListItem key={reactivity.reactivityId}>
+            <ListItemText>{reactivity.title}</ListItemText>
+          </ListItem>
         ))}
-      </ul>
-    </div>
+      </List>
+    </>
   );
 }
 
