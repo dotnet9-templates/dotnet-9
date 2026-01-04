@@ -504,3 +504,5 @@ In short: it lazily resolves and caches IMediator, and explicitly fails if it is
     public class ReactivityController(IMediator mediator) : BaseApiController
 
 in ReactivivityController we remove the IMediator dependency injection and use the Mediator property from the BaseApiController.
+
+Test on postman module 4. create a new reactivity. you'll receive the ReactivityId. and put it in the details endpoint to get the details of the reactivity.
