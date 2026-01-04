@@ -1,3 +1,4 @@
+using Application.Queries;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
@@ -12,6 +13,9 @@ builder.Services.AddDbContext<AppDbContext>( options => {
 
 // Add CORS policy
 builder.Services.AddCors();
+
+// Add MediatR to the container, to know the location of the handlers.
+builder.Services.AddMediatR(x => x.RegisterServicesFromAssemblyContaining<GetReactivityList.Handler>());
 
 var app = builder.Build();
 

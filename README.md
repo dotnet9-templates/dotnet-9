@@ -383,3 +383,17 @@ This will not work on the internet but it will work on development mode.
 
 Axios
 in client npm install axios
+
++++=== STARTING SECTION 4 part 28 - 29 ===+++
+
+=== STARTING SECTION 4 part 30 ===
+
+install nuget MediaTr by Jimmy Board install in Application.csproj 12.4.1 version.
+
+I installed 14.0.0 is for dotnet 10 and backwards compatible with dotnet 9.
+
+files GetReactivityList.cs and ReactivityController.cs to pay attention to how the medator handles the request.
+
+we used Imediator mediator in ReactivityController.cs to handle the request as a dependency injection.
+
+in postman use module 4 to test the API. use the query get reactivities to get the list of reactivities.
