@@ -1,23 +1,22 @@
 using Application.Queries;
 using Domain;
-using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 
 namespace API.Controllers
 {
-    public class ReactivityController(IMediator mediator) : BaseApiController
+    public class ReactivityController() : BaseApiController
     {
         [HttpGet]
         public async Task<ActionResult<List<Reactivity>>> GetReactivities()
         {
-            return await mediator.Send(new GetReactivityList.Query());
+            return await Mediator.Send(new GetReactivityList.Query());
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Reactivity>> GetReactivityDetail(string id)
         {
-            return await mediator.Send(new GetReactivityDetails.Query { ReactivityId = id });
+            return await Mediator.Send(new GetReactivityDetails.Query { ReactivityId = id });
         }
     }
 }

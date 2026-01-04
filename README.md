@@ -482,3 +482,25 @@ public class Handler(AppDbContext context) : IRequestHandler<Query, Reactivity>
 So `AppDbContext` was just sitting unused in your controller as an extra parameter. Removing it doesn't break anything because you were never using it there in the first place! 🎯
 
 === STARTING SECTION 4 part 32 ===
+
+Making API Controller thinner.
+understanding variables in baseapi controller.
+
+      protected IMediator Mediator => \\_mediator ??= HttpContext.RequestServices.GetRequiredService<IMediator>();
+
+=> is the expression-bodied property syntax in C#. It means the property returns the value of the expression on the right instead of using a full get block.
+The ??= operator assigns a value only if the variable is currently null.
+Together, this line lazily resolves IMediator from dependency injection, stores it in \_mediator, and reuses it on future accesses.
+
+        protected IMediator Mediator => _mediator ??= HttpContext.RequestServices.GetRequiredService<IMediator>()
+        ?? throw new InvalidOperationException("Mediator is not registered");
+
+This is still an expression-bodied property, but with an added safety check.
+First, \_mediator ??= assigns \_mediator if it is null.
+Then the second ?? checks the result of that assignment.
+If resolving IMediator returns null, it throws an InvalidOperationException.
+In short: it lazily resolves and caches IMediator, and explicitly fails if it is not registered in dependency injection.
+
+    public class ReactivityController(IMediator mediator) : BaseApiController
+
+in ReactivivityController we remove the IMediator dependency injection and use the Mediator property from the BaseApiController.
