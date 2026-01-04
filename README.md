@@ -510,3 +510,11 @@ in ReactivivityController we remove the IMediator dependency injection and use t
 Test on postman module 4. create a new reactivity. you'll receive the ReactivityId. and put it in the details endpoint to get the details of the reactivity.
 
 === STARTING SECTION 4 part 34 ===
+
+returning no content for edit or put . . . can watch if wanted.
+
+Test Put on module 4. mapped only to title. you should get a 204 status code no return for proper edit.
+Then get the details of the reactivity to see the changes.
+
+=== STARTING SECTION 4 part 35 ===
+Auto mapper instead of inputting manually like in previous secction for title.

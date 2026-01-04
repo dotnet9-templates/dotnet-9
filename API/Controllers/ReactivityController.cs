@@ -25,5 +25,13 @@ namespace API.Controllers
         {
             return await Mediator.Send(new CreateReactivity.Command { Reactivity = reactivity });
         }
+
+        [HttpPut]
+        public async Task<ActionResult> EditReactivity(Reactivity reactivity)
+        {
+            await Mediator.Send(new EditReactivity.Command { Reactivity = reactivity });
+            
+            return NoContent();
+        }
     }
 }
