@@ -397,3 +397,88 @@ files GetReactivityList.cs and ReactivityController.cs to pay attention to how t
 we used Imediator mediator in ReactivityController.cs to handle the request as a dependency injection.
 
 in postman use module 4 to test the API. use the query get reactivities to get the list of reactivities.
+
+=== STARTING SECTION 4 part 31 ===
+
+Interesting debugging on mediatr.
+
+cleanup controller injection of AppDbContext context line 9
+
+Let me clarify this for you! The key is understanding **where** `AppDbContext` is actually used.
+
+## Here's What's Happening:
+
+Your controller **BEFORE** (with AppDbContext):
+
+```csharp
+public class ReactivityController(AppDbContext context, IMediator mediator) : BaseApiController
+```
+
+Your controller **NOW** (without AppDbContext):
+
+```csharp
+public class ReactivityController(IMediator mediator) : BaseApiController
+```
+
+## Why It Still Works:
+
+**`AppDbContext` was NEVER used in your controller!** Look at your methods:
+
+```csharp
+[HttpGet]
+public async Task<ActionResult<List<Reactivity>>> GetReactivities()
+{
+    return await mediator.Send(new GetReactivityList.Query());  // ← Uses mediator, NOT context
+}
+
+[HttpGet("{id}")]
+public async Task<ActionResult<Reactivity>> GetReactivityDetail(string id)
+{
+    return await mediator.Send(new GetReactivityDetails.Query { ReactivityId = id });  // ← Uses mediator, NOT context
+}
+```
+
+You never wrote `context.Reactivities` anywhere in your controller! You only used `mediator`.
+
+## Where AppDbContext IS Actually Used:
+
+It's in your **handlers** in the Application layer:
+
+**GetReactivityList.cs:**
+
+```csharp
+public class Handler(AppDbContext context) : IRequestHandler<Query, List<Reactivity>>
+{
+    public async Task<List<Reactivity>> Handle(Query request, CancellationToken cancellationToken)
+    {
+        return await context.Reactivities.ToListAsync(cancellationToken);  // ← context used HERE
+    }
+}
+```
+
+**GetReactivityDetails.cs:**
+
+```csharp
+public class Handler(AppDbContext context) : IRequestHandler<Query, Reactivity>
+{
+    public async Task<Reactivity> Handle(Query request, CancellationToken cancellationToken)
+    {
+        var reactivity = await context.Reactivities.FindAsync([request.ReactivityId], cancellationToken);  // ← context used HERE
+        if (reactivity == null) throw new Exception("Reactivity not found");
+        return reactivity;
+    }
+}
+```
+
+## The Flow:
+
+1. **Request comes in** → Controller
+2. **Controller** → Sends query via `mediator.Send()`
+3. **MediatR** → Finds the right handler and creates it
+4. **DI Container** → Injects `AppDbContext` into the handler (not the controller!)
+5. **Handler** → Uses `AppDbContext` to get data from database
+6. **Handler** → Returns data back through MediatR to controller
+
+So `AppDbContext` was just sitting unused in your controller as an extra parameter. Removing it doesn't break anything because you were never using it there in the first place! 🎯
+
+=== STARTING SECTION 4 part 32 ===
