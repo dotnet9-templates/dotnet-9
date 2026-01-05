@@ -528,3 +528,11 @@ MappProfiles needs a service in Program.cs
 in builder.Services.AddAutoMapper(typeof(MappingProfiles).Assembly); The assemply is in the API/bin/Application.dll
 
 Module 4 to test. with further changes of all properties. EDIT
+
+=== STARTING SECTION 4 part 36 ===
+
+Create Delet Controller and Handler.
+Test module 4 with the created Reactivity . . .
+Delete, get 200k then get the detail and it should be gone.
+
+=== STARTING SECTION 4 part 37 ===
