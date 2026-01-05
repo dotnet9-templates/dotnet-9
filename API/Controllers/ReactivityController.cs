@@ -9,9 +9,9 @@ namespace API.Controllers
     public class ReactivityController() : BaseApiController
     {
         [HttpGet]
-        public async Task<ActionResult<List<Reactivity>>> GetReactivities()
+        public async Task<ActionResult<List<Reactivity>>> GetReactivities(CancellationToken ct)
         {
-            return await Mediator.Send(new GetReactivityList.Query());
+            return await Mediator.Send(new GetReactivityList.Query(), ct);
         }
 
         [HttpGet("{id}")]
