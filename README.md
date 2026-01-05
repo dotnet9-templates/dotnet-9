@@ -540,3 +540,9 @@ Delete, get 200k then get the detail and it should be gone.
 using cancellation tokens to cancel the request if the user closes the browser and helps with cancel token on postman.
 
 This is an example of a cancellation token in the handler and what it looks like.
+
+=== STARTING SECTION 4 part 38 ===
+
+Using Debugger.
+
++++=== STARTING SECTION 5 ===+++
