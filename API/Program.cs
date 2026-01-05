@@ -1,3 +1,4 @@
+using Application.Core;
 using Application.Queries;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
@@ -17,6 +18,8 @@ builder.Services.AddCors();
 // Add MediatR to the container, to know the location of the handlers.
 builder.Services.AddMediatR(x => x.RegisterServicesFromAssemblyContaining<GetReactivityList.Handler>());
 
+// Add AutoMapper to the container.
+builder.Services.AddAutoMapper(typeof(MappingProfiles).Assembly);
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

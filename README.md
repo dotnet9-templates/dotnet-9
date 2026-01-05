@@ -518,3 +518,13 @@ Then get the details of the reactivity to see the changes.
 
 === STARTING SECTION 4 part 35 ===
 Auto mapper instead of inputting manually like in previous secction for title.
+
+nuget install automapper by jimmy bogard.
+use version 13.0.1 as it's free and auto mapper 14 uses a commercial license. Does other things we do not need or want.
+install into Application.csproj and Persistence.csproj
+
+MappProfiles needs a service in Program.cs
+
+in builder.Services.AddAutoMapper(typeof(MappingProfiles).Assembly); The assemply is in the API/bin/Application.dll
+
+Module 4 to test. with further changes of all properties. EDIT
