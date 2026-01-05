@@ -544,5 +544,12 @@ This is an example of a cancellation token in the handler and what it looks like
 === STARTING SECTION 4 part 38 ===
 
 Using Debugger.
+Breakpoints in VS Code.
 
 +++=== STARTING SECTION 5 ===+++
+
+=== STARTING SECTION 5 part 41 ===
+
+Creating architecture for the project client side.
+
+=== STARTING SECTION 5 part 42 ===
