@@ -551,5 +551,7 @@ Breakpoints in VS Code.
 === STARTING SECTION 5 part 41 ===
 
 Creating architecture for the project client side.
+created folder and renamed files and deleted files that were not needed.
+clean bill of health in console.
 
 === STARTING SECTION 5 part 42 ===
