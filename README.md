@@ -562,3 +562,7 @@ https://mui.com/material-ui/react-app-bar/ use basic app bar example.
 <MenuIcon /> change to <Menu /> then add import @mui/icons-material
 
 add <CssBaseline /> to App.tsx to make sure the styles are applied correctly.
+
+=== STARTING SECTION 5 part 43 ===
+
+Make it look good but not worried about responsiveness.
