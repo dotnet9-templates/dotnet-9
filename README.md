@@ -566,3 +566,9 @@ add <CssBaseline /> to App.tsx to make sure the styles are applied correctly.
 === STARTING SECTION 5 part 43 ===
 
 Make it look good but not worried about responsiveness.
+
+mt in mui is margin top \* 2 which is 8px. because the container is 4px. different than tailwind css.
+
+=== STARTING SECTION 5 part 44 ===
+Grid2 is just now Grid at this point.
+https://mui.com/material-ui/migration/upgrade-to-grid-v2/

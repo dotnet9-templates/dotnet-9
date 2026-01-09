@@ -1,13 +1,8 @@
-import {
-  Container,
-  CssBaseline,
-  List,
-  ListItem,
-  ListItemText,
-} from "@mui/material";
+import { Container, CssBaseline } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import NavBar from "./NavBar";
+import ReactivityDashboard from "../../features/reactivities/ReactivityDashboard";
 
 function App() {
   const [reactivities, setReactivities] = useState<Reactivity[]>([]);
@@ -25,13 +20,7 @@ function App() {
       <CssBaseline />
       <NavBar />
       <Container maxWidth="xl" sx={{ mt: 3 }}>
-        <List>
-          {reactivities.map((reactivity) => (
-            <ListItem key={reactivity.reactivityId}>
-              <ListItemText>{reactivity.title}</ListItemText>
-            </ListItem>
-          ))}
-        </List>
+        <ReactivityDashboard reactivities={reactivities} />
       </Container>
     </>
   );
