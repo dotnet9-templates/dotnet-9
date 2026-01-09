@@ -555,3 +555,10 @@ created folder and renamed files and deleted files that were not needed.
 clean bill of health in console.
 
 === STARTING SECTION 5 part 42 ===
+
+Navbar creation.
+https://mui.com/material-ui/react-app-bar/ use basic app bar example.
+
+<MenuIcon /> change to <Menu /> then add import @mui/icons-material
+
+add <CssBaseline /> to App.tsx to make sure the styles are applied correctly.
