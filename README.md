@@ -572,3 +572,13 @@ mt in mui is margin top \* 2 which is 8px. because the container is 4px. differe
 === STARTING SECTION 5 part 44 ===
 Grid2 is just now Grid at this point.
 https://mui.com/material-ui/migration/upgrade-to-grid-v2/
+
+=== STARTING SECTION 5 part 45 ===
+
+for file ReactivityList.tsx for mapping a funciton using the {} we need to explicitly return the value. for () it means return one thing.
+
+=== STARTING SECTION 5 part 46 ===
+
+Skipped
+
+=== STARTING SECTION 5 part 47 ===
