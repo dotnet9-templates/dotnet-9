@@ -9,9 +9,13 @@ import {
 
 type Props = {
   reactivity: Reactivity;
+  cancelSelectReactivity: () => void;
 };
 
-export default function ReactivityDetail({ reactivity }: Props) {
+export default function ReactivityDetail({
+  reactivity,
+  cancelSelectReactivity,
+}: Props) {
   return (
     <Card sx={{ borderRadius: 3 }}>
       <CardMedia
@@ -27,7 +31,9 @@ export default function ReactivityDetail({ reactivity }: Props) {
       </CardContent>
       <CardActions>
         <Button color="primary">Edit</Button>
-        <Button color="inherit">Cancel</Button>
+        <Button onClick={cancelSelectReactivity} color="inherit">
+          Cancel
+        </Button>
       </CardActions>
     </Card>
   );

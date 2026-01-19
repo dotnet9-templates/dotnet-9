@@ -9,9 +9,13 @@ import {
 
 type Props = {
   reactivity: Reactivity;
+  selectReactivity: (id: string) => void;
 };
 
-export default function ReactivityCard({ reactivity }: Props) {
+export default function ReactivityCard({
+  reactivity,
+  selectReactivity,
+}: Props) {
   return (
     <Card sx={{ borderRadius: 3 }}>
       <CardContent>
@@ -31,7 +35,11 @@ export default function ReactivityCard({ reactivity }: Props) {
         sx={{ display: "flex", justifyContent: "space-between", pb: 2 }}
       >
         <Chip label={reactivity.category} variant="outlined" />
-        <Button size="medium" variant="contained">
+        <Button
+          onClick={() => selectReactivity(reactivity.reactivityId)}
+          size="medium"
+          variant="contained"
+        >
           View
         </Button>
       </CardActions>

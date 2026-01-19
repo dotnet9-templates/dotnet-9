@@ -6,6 +6,9 @@ import ReactivityDashboard from "../../features/reactivities/dashboard/Reactivit
 
 function App() {
   const [reactivities, setReactivities] = useState<Reactivity[]>([]);
+  const [selectedReactivity, setSelectedReactivity] = useState<
+    Reactivity | undefined
+  >(undefined);
 
   useEffect(() => {
     axios
@@ -15,12 +18,25 @@ function App() {
     return () => {};
   }, []);
 
+  const handleSelectReactivity = (id: string) => {
+    setSelectedReactivity(reactivities.find((x) => x.reactivityId === id));
+  };
+
+  const handleCancelSelectReactivity = () => {
+    setSelectedReactivity(undefined);
+  };
+
   return (
     <Box sx={{ bgcolor: "#eeeeee" }}>
       <CssBaseline />
       <NavBar />
       <Container maxWidth="xl" sx={{ mt: 3 }}>
-        <ReactivityDashboard reactivities={reactivities} />
+        <ReactivityDashboard
+          reactivities={reactivities}
+          selectReactivity={handleSelectReactivity}
+          cancelSelectReactivity={handleCancelSelectReactivity}
+          selectedReactivity={selectedReactivity}
+        />
       </Container>
     </Box>
   );

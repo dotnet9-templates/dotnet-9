@@ -4,16 +4,32 @@ import ReactivityDetail from "../details/ReactivityDetail";
 
 type Props = {
   reactivities: Reactivity[];
+  selectReactivity: (id: string) => void;
+  cancelSelectReactivity: () => void;
+  selectedReactivity?: Reactivity;
 };
 
-export default function ReactivityDashboard({ reactivities }: Props) {
+export default function ReactivityDashboard({
+  reactivities,
+  cancelSelectReactivity,
+  selectReactivity,
+  selectedReactivity,
+}: Props) {
   return (
     <Grid container spacing={3}>
       <Grid size={7}>
-        <ReactivityList reactivities={reactivities} />
+        <ReactivityList
+          reactivities={reactivities}
+          selectReactivity={selectReactivity}
+        />
       </Grid>
       <Grid size={5}>
-        {reactivities[0] && <ReactivityDetail reactivity={reactivities[0]} />}
+        {selectedReactivity && (
+          <ReactivityDetail
+            reactivity={selectedReactivity}
+            cancelSelectReactivity={cancelSelectReactivity}
+          />
+        )}
       </Grid>
     </Grid>
   );

@@ -579,6 +579,14 @@ for file ReactivityList.tsx for mapping a funciton using the {} we need to expli
 
 === STARTING SECTION 5 part 46 ===
 
-Skipped
+Inputting images
 
 === STARTING SECTION 5 part 47 ===
+
+Selecting an individual activity to view.
+
+no state management yet, this is an example of how to do it with props.
+
+shows how to use props with selected . . . destructuring props.
+
+Important to see how props and parameter passing works for components with no state management. currently using prop drilling.
