@@ -596,3 +596,9 @@ Important to see how props and parameter passing works for components with no st
 Date form is a little off and browswer will look different on each one.
 
 === STARTING SECTION 5 part 49 ===
+
+using state hooks for edit mode. still prop drilling.
+
+seeing the form, creating an activity form and cancel buttons working.
+
+=== STARTING SECTION 5 part 50 ===

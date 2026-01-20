@@ -9,6 +9,7 @@ function App() {
   const [selectedReactivity, setSelectedReactivity] = useState<
     Reactivity | undefined
   >(undefined);
+  const [editMode, setEditMode] = useState(false);
 
   useEffect(() => {
     axios
@@ -26,16 +27,29 @@ function App() {
     setSelectedReactivity(undefined);
   };
 
+  const handleOpenForm = (id?: string) => {
+    if (id) handleSelectReactivity(id);
+    else handleCancelSelectReactivity();
+    setEditMode(true);
+  };
+
+  const handleCloseForm = () => {
+    setEditMode(false);
+  };
+
   return (
     <Box sx={{ bgcolor: "#eeeeee" }}>
       <CssBaseline />
-      <NavBar />
+      <NavBar openForm={handleOpenForm} />
       <Container maxWidth="xl" sx={{ mt: 3 }}>
         <ReactivityDashboard
           reactivities={reactivities}
           selectReactivity={handleSelectReactivity}
           cancelSelectReactivity={handleCancelSelectReactivity}
           selectedReactivity={selectedReactivity}
+          editMode={editMode}
+          openForm={handleOpenForm}
+          closeForm={handleCloseForm}
         />
       </Container>
     </Box>

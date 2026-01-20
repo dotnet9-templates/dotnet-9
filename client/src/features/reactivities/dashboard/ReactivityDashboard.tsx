@@ -1,13 +1,16 @@
 import { Grid } from "@mui/material";
 import ReactivityList from "./ReactivityList";
 import ReactivityDetail from "../details/ReactivityDetail";
-import ReactivityForm from "../from/ReactivityForm";
+import ReactivityForm from "../form/ReactivityForm";
 
 type Props = {
   reactivities: Reactivity[];
   selectReactivity: (id: string) => void;
   cancelSelectReactivity: () => void;
   selectedReactivity?: Reactivity;
+  openForm: (id: string) => void; // need id to open the form for the partcular reactivity.
+  closeForm: () => void;
+  editMode: boolean;
 };
 
 export default function ReactivityDashboard({
@@ -15,6 +18,9 @@ export default function ReactivityDashboard({
   cancelSelectReactivity,
   selectReactivity,
   selectedReactivity,
+  openForm,
+  closeForm,
+  editMode,
 }: Props) {
   return (
     <Grid container spacing={3}>
@@ -25,13 +31,19 @@ export default function ReactivityDashboard({
         />
       </Grid>
       <Grid size={5}>
-        {selectedReactivity && (
+        {selectedReactivity && !editMode && (
           <ReactivityDetail
             reactivity={selectedReactivity}
             cancelSelectReactivity={cancelSelectReactivity}
+            openForm={openForm}
           />
         )}
-        <ReactivityForm />
+        {editMode && (
+          <ReactivityForm
+            closeForm={closeForm}
+            reactivity={selectedReactivity}
+          />
+        )}
       </Grid>
     </Grid>
   );
