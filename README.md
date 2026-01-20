@@ -626,4 +626,8 @@ new FormData(form) only looks for form elements (input, textarea, select) with a
 populate itself into the list. front end only.
 See front end changes only to forms and list.
 
-=== STARTING SECTION 5 part 52 ===
+=== STARTING SECTION 5 part 52 and 53 ===
+
+delete button added. all client side crud examples completed for this section
+
+=== STARTING SECTION 6 part 54 ===

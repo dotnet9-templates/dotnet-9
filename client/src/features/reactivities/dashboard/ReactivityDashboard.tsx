@@ -12,6 +12,7 @@ type Props = {
   closeForm: () => void;
   editMode: boolean;
   submitForm: (reactivity: Reactivity) => void;
+  deleteReactivity: (id: string) => void;
 };
 
 export default function ReactivityDashboard({
@@ -23,6 +24,7 @@ export default function ReactivityDashboard({
   closeForm,
   editMode,
   submitForm,
+  deleteReactivity,
 }: Props) {
   return (
     <Grid container spacing={3}>
@@ -30,6 +32,7 @@ export default function ReactivityDashboard({
         <ReactivityList
           reactivities={reactivities}
           selectReactivity={selectReactivity}
+          deleteReactivity={deleteReactivity}
         />
       </Grid>
       <Grid size={5}>

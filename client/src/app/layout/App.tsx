@@ -55,6 +55,10 @@ function App() {
     setEditMode(false);
   };
 
+  const handleDeleteReactivity = (id: string) => {
+    setReactivities(reactivities.filter((x) => x.reactivityId !== id));
+  };
+
   return (
     <Box sx={{ bgcolor: "#eeeeee" }}>
       <CssBaseline />
@@ -69,6 +73,7 @@ function App() {
           openForm={handleOpenForm}
           closeForm={handleCloseForm}
           submitForm={handleSubmitForm}
+          deleteReactivity={handleDeleteReactivity}
         />
       </Container>
     </Box>
