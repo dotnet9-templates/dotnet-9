@@ -602,3 +602,23 @@ using state hooks for edit mode. still prop drilling.
 seeing the form, creating an activity form and cancel buttons working.
 
 === STARTING SECTION 5 part 50 ===
+
+Forms input 2 ways
+
+1. controlled input: component states react knows what's going on.
+2. uncontrolled input: react no idea what's going on.
+
+able to see console submit from create form because of the name property on the input fields.
+
+Why It Works:
+The name attribute is a standard HTML form feature. When you use new FormData(form), it automatically:
+Finds all input elements in the form
+Looks at their name attribute
+Gets their current value
+Creates key-value pairs: { [name]: value }
+Without the name attribute, the input values wouldn't be captured because FormData wouldn't know what to call them! The name is literally the property name in your final data object.
+
+The FormData Rule:
+new FormData(form) only looks for form elements (input, textarea, select) with a name attribute inside the form. That's the HTML standard.
+
+=== STARTING SECTION 5 part 51 ===
