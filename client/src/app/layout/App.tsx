@@ -37,6 +37,24 @@ function App() {
     setEditMode(false);
   };
 
+  const handleSubmitForm = (reactivity: Reactivity) => {
+    if (reactivity.reactivityId) {
+      setReactivities(
+        reactivities.map((x) =>
+          x.reactivityId === reactivity.reactivityId ? reactivity : x
+        )
+      );
+    } else {
+      const newReactivity = {
+        ...reactivity,
+        id: reactivities.length.toString(),
+      };
+      setSelectedReactivity(newReactivity); // this is to show the new reactivity in the detail view.
+      setReactivities([...reactivities, newReactivity]);
+    }
+    setEditMode(false);
+  };
+
   return (
     <Box sx={{ bgcolor: "#eeeeee" }}>
       <CssBaseline />
@@ -50,6 +68,7 @@ function App() {
           editMode={editMode}
           openForm={handleOpenForm}
           closeForm={handleCloseForm}
+          submitForm={handleSubmitForm}
         />
       </Container>
     </Box>

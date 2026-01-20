@@ -11,6 +11,7 @@ type Props = {
   openForm: (id: string) => void; // need id to open the form for the partcular reactivity.
   closeForm: () => void;
   editMode: boolean;
+  submitForm: (reactivity: Reactivity) => void;
 };
 
 export default function ReactivityDashboard({
@@ -21,6 +22,7 @@ export default function ReactivityDashboard({
   openForm,
   closeForm,
   editMode,
+  submitForm,
 }: Props) {
   return (
     <Grid container spacing={3}>
@@ -42,6 +44,7 @@ export default function ReactivityDashboard({
           <ReactivityForm
             closeForm={closeForm}
             reactivity={selectedReactivity}
+            submitForm={submitForm}
           />
         )}
       </Grid>

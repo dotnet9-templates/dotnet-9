@@ -4,9 +4,14 @@ import type { FormEvent } from "react";
 type Props = {
   reactivity?: Reactivity;
   closeForm: () => void;
+  submitForm: (reactivity: Reactivity) => void;
 };
 
-export default function ReactivityForm({ reactivity, closeForm }: Props) {
+export default function ReactivityForm({
+  reactivity,
+  closeForm,
+  submitForm,
+}: Props) {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault(); // prevent the default form submission behavior in the browser.
     const formData = new FormData(event.currentTarget);
@@ -14,7 +19,11 @@ export default function ReactivityForm({ reactivity, closeForm }: Props) {
     formData.forEach((value, key) => {
       data[key] = value;
     });
+    if (reactivity) {
+      data.reactivityId = reactivity.reactivityId;
+    }
     console.log(data);
+    submitForm(data as unknown as Reactivity);
   };
 
   return (
