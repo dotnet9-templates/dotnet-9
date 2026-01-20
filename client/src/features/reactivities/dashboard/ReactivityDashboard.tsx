@@ -1,6 +1,7 @@
 import { Grid } from "@mui/material";
 import ReactivityList from "./ReactivityList";
 import ReactivityDetail from "../details/ReactivityDetail";
+import ReactivityForm from "../from/ReactivityForm";
 
 type Props = {
   reactivities: Reactivity[];
@@ -30,6 +31,7 @@ export default function ReactivityDashboard({
             cancelSelectReactivity={cancelSelectReactivity}
           />
         )}
+        <ReactivityForm />
       </Grid>
     </Grid>
   );

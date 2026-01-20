@@ -590,3 +590,9 @@ no state management yet, this is an example of how to do it with props.
 shows how to use props with selected . . . destructuring props.
 
 Important to see how props and parameter passing works for components with no state management. currently using prop drilling.
+
+=== STARTING SECTION 5 part 48 ===
+
+Date form is a little off and browswer will look different on each one.
+
+=== STARTING SECTION 5 part 49 ===
