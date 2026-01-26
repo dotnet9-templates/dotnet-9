@@ -652,6 +652,21 @@ For now, we want to see a flicker of the loading text before the data is loaded.
 console > network tag inside fetching to see one query of Reactivities.
 react query removes ability to remove duplicate queries.
 
+At this point the version is: "@tanstack/react-query": "^5.90.20",
+
 === STARTING SECTION 6 part 56 ===
 
 installing reactu query developer tools
+
+https://tanstack.com/query/v5/docs/framework/react/devtools
+
+be sure you're in the client folder and run npm i @tanstack/react-query-devtools
+Then we will use the floating tools.
+
+At this point the version is: "@tanstack/react-query-devtools": "^5.91.2",
+
+now on the lower right side we have a button to click on to open the developer tools.
+clicking on the button and first query will show data of 11 reactivities.
+You can also trigger the loading state by clicking on the button and then clicking on the button again to see the loading state. then press button to see the data again.
+
+=== STARTING SECTION 6 part 57 ===

@@ -64,7 +64,8 @@ function App() {
   };
 
   return (
-    <Box sx={{ bgcolor: "#eeeeee" }}>
+    // minHeight: "100vh" is to make sure the box is at least the height of the viewport.
+    <Box sx={{ bgcolor: "#eeeeee", minHeight: "100vh" }}>
       <CssBaseline />
       <NavBar openForm={handleOpenForm} />
       <Container maxWidth="xl" sx={{ mt: 3 }}>
