@@ -632,4 +632,26 @@ delete button added. all client side crud examples completed for this section
 
 === STARTING SECTION 6 part 54 ===
 
+Introduction and understanding cache and global states.
+
 === STARTING SECTION 6 part 55 ===
+
+Setting up React Query (Tanstack)
+https://tanstack.com/query/v5/docs/framework/react/installation
+
+be sure you're in the client folder: npm i @tanstack/react-query
+
+https://tanstack.com/query/v5/docs/framework/react/quick-start
+
+use <QueryClientProvider> to wrap the app. in Main.tsx
+
+in App.tsx, we're removing local state and using react query to manage the state.
+
+For now, we want to see a flicker of the loading text before the data is loaded.
+
+console > network tag inside fetching to see one query of Reactivities.
+react query removes ability to remove duplicate queries.
+
+=== STARTING SECTION 6 part 56 ===
+
+installing reactu query developer tools

@@ -1,26 +1,29 @@
-import { Box, Container, CssBaseline } from "@mui/material";
+import { Box, Container, CssBaseline, Typography } from "@mui/material";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import NavBar from "./NavBar";
 import ReactivityDashboard from "../../features/reactivities/dashboard/ReactivityDashboard";
+import { useQuery } from "@tanstack/react-query";
 
 function App() {
-  const [reactivities, setReactivities] = useState<Reactivity[]>([]);
   const [selectedReactivity, setSelectedReactivity] = useState<
     Reactivity | undefined
   >(undefined);
   const [editMode, setEditMode] = useState(false);
 
-  useEffect(() => {
-    axios
-      .get<Reactivity[]>("https://localhost:5001/api/reactivity")
-      .then((response) => setReactivities(response.data));
-    // cleanup function
-    return () => {};
-  }, []);
+  // curly braces are destructuring the data from the response.
+  const { data: reactivities, isPending } = useQuery({
+    queryKey: ["reactivities"],
+    queryFn: async () => {
+      const response = await axios.get<Reactivity[]>(
+        "https://localhost:5001/api/reactivity",
+      );
+      return response.data;
+    },
+  });
 
   const handleSelectReactivity = (id: string) => {
-    setSelectedReactivity(reactivities.find((x) => x.reactivityId === id));
+    setSelectedReactivity(reactivities!.find((x) => x.reactivityId === id));
   };
 
   const handleCancelSelectReactivity = () => {
@@ -38,25 +41,26 @@ function App() {
   };
 
   const handleSubmitForm = (reactivity: Reactivity) => {
-    if (reactivity.reactivityId) {
-      setReactivities(
-        reactivities.map((x) =>
-          x.reactivityId === reactivity.reactivityId ? reactivity : x
-        )
-      );
-    } else {
-      const newReactivity = {
-        ...reactivity,
-        id: reactivities.length.toString(),
-      };
-      setSelectedReactivity(newReactivity); // this is to show the new reactivity in the detail view.
-      setReactivities([...reactivities, newReactivity]);
-    }
+    // if (reactivity.reactivityId) {
+    //   setReactivities(
+    //     reactivities.map((x) =>
+    //       x.reactivityId === reactivity.reactivityId ? reactivity : x,
+    //     ),
+    //   );
+    // } else {
+    //   const newReactivity = {
+    //     ...reactivity,
+    //     id: reactivities.length.toString(),
+    //   };
+    //   setSelectedReactivity(newReactivity); // this is to show the new reactivity in the detail view.
+    //   setReactivities([...reactivities, newReactivity]);
+    // }
+    console.log(reactivity); //to remove the warning about the reactivity being undefined.
     setEditMode(false);
   };
 
   const handleDeleteReactivity = (id: string) => {
-    setReactivities(reactivities.filter((x) => x.reactivityId !== id));
+    console.log(id);
   };
 
   return (
@@ -64,17 +68,21 @@ function App() {
       <CssBaseline />
       <NavBar openForm={handleOpenForm} />
       <Container maxWidth="xl" sx={{ mt: 3 }}>
-        <ReactivityDashboard
-          reactivities={reactivities}
-          selectReactivity={handleSelectReactivity}
-          cancelSelectReactivity={handleCancelSelectReactivity}
-          selectedReactivity={selectedReactivity}
-          editMode={editMode}
-          openForm={handleOpenForm}
-          closeForm={handleCloseForm}
-          submitForm={handleSubmitForm}
-          deleteReactivity={handleDeleteReactivity}
-        />
+        {!reactivities || isPending ? (
+          <Typography>Loading...</Typography>
+        ) : (
+          <ReactivityDashboard
+            reactivities={reactivities}
+            selectReactivity={handleSelectReactivity}
+            cancelSelectReactivity={handleCancelSelectReactivity}
+            selectedReactivity={selectedReactivity}
+            editMode={editMode}
+            openForm={handleOpenForm}
+            closeForm={handleCloseForm}
+            submitForm={handleSubmitForm}
+            deleteReactivity={handleDeleteReactivity}
+          />
+        )}
       </Container>
     </Box>
   );
