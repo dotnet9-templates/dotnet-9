@@ -765,3 +765,16 @@ we still need more work i.e. where to load components.
 Testing client...should have a default homepage and to see the list you need to put in url https://localhost:3001/reactivities
 
 === STARTING SECTION 7 part 67 ===
+
+Using NavLink to navigate to the reactivities page.
+
+Reactivites click doesn't have loading. it's coming frome cache.
+
+Understand how {children} works. when being passed as a prop to a component, it will be the content of the component.
+
+the correct code for MenuItemLink file is type { ReactNode } from "react"; Verified from owners repo.
+https://github.com/TryCatchLearn/Reactivities/commit/30e1d245962c3b9d7803d2f321525269e31b3e6f#diff-1892cf650bcb5f9f189bd72a6eed3f739edd26fb230ccfff150b5eb116f2e726
+
+Test on client should now show yellow highlighted text when the link is active for ony Reactivity and Create Reactivity links only.
+
+=== STARTING SECTION 7 part 68 ===
