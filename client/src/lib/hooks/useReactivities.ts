@@ -22,5 +22,14 @@ export const useReactivities = () => {
     },
   });
 
-  return { reactivities, isPending, updateReactivity };
+  const createReactivity = useMutation({
+    mutationFn: async (reactivity: Reactivity) => {
+      await agent.post("/reactivity", reactivity);
+    },
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ["reactivities"] });
+    },
+  });
+
+  return { reactivities, isPending, updateReactivity, createReactivity };
 };

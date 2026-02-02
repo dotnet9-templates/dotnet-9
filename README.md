@@ -714,4 +714,8 @@ fixed date...
 
 === STARTING SECTION 6 part 61 ===
 
-start
+creating a mutation with react query.
+
+Testing you should see the created reactivity on the list and details.
+
+=== STARTING SECTION 6 part 62 ===

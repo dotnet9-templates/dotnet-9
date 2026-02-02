@@ -8,7 +8,7 @@ type Props = {
 };
 
 export default function ReactivityForm({ reactivity, closeForm }: Props) {
-  const { updateReactivity } = useReactivities();
+  const { updateReactivity, createReactivity } = useReactivities();
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault(); // prevent the default form submission behavior in the browser.
     const formData = new FormData(event.currentTarget);
@@ -19,6 +19,9 @@ export default function ReactivityForm({ reactivity, closeForm }: Props) {
     if (reactivity) {
       data.reactivityId = reactivity.reactivityId;
       await updateReactivity.mutateAsync(data as unknown as Reactivity);
+      closeForm();
+    } else {
+      await createReactivity.mutateAsync(data as unknown as Reactivity);
       closeForm();
     }
   };
@@ -78,7 +81,7 @@ export default function ReactivityForm({ reactivity, closeForm }: Props) {
             type="submit"
             color="success"
             variant="contained"
-            disabled={updateReactivity.isPending}
+            disabled={updateReactivity.isPending || createReactivity.isPending}
           >
             Submit
           </Button>
