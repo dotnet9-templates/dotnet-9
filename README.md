@@ -672,3 +672,16 @@ You can also trigger the loading state by clicking on the button and then clicki
 === STARTING SECTION 6 part 57 ===
 
 hooks must have the word use in the name.
+
+=== STARTING SECTION 6 part 58 ===
+
+Using Axios in the hook.
+
+for useReactvities we no longer need to use axios and can use agent.
+also in the same file we do not need to use the hardcoded url and can use the agent for the base url.
+
+now the browser will have the loading delay of 1 second. because of the interceptor in the agent.
+
+remove the hardcoded url and use the agent for the base url.
+
+used a .env file to store the base url.

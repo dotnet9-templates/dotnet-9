@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+import agent from "../api/agent";
 
 export const useReactivities = () => {
   // curly braces are destructuring the data from the response.
@@ -7,9 +7,7 @@ export const useReactivities = () => {
   const { data: reactivities, isPending } = useQuery({
     queryKey: ["reactivities"],
     queryFn: async () => {
-      const response = await axios.get<Reactivity[]>(
-        "https://localhost:5001/api/reactivity",
-      );
+      const response = await agent.get<Reactivity[]>("reactivity");
       return response.data;
     },
   });
