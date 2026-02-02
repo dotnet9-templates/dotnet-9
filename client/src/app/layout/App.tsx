@@ -1,26 +1,15 @@
 import { Box, Container, CssBaseline, Typography } from "@mui/material";
-import axios from "axios";
 import { useState } from "react";
 import NavBar from "./NavBar";
 import ReactivityDashboard from "../../features/reactivities/dashboard/ReactivityDashboard";
-import { useQuery } from "@tanstack/react-query";
+import { useReactivities } from "../../lib/hooks/useReactivities";
 
 function App() {
   const [selectedReactivity, setSelectedReactivity] = useState<
     Reactivity | undefined
   >(undefined);
   const [editMode, setEditMode] = useState(false);
-
-  // curly braces are destructuring the data from the response.
-  const { data: reactivities, isPending } = useQuery({
-    queryKey: ["reactivities"],
-    queryFn: async () => {
-      const response = await axios.get<Reactivity[]>(
-        "https://localhost:5001/api/reactivity",
-      );
-      return response.data;
-    },
-  });
+  const { reactivities, isPending } = useReactivities(); // using the hook to get the reactivities. this is a custom hook.
 
   const handleSelectReactivity = (id: string) => {
     setSelectedReactivity(reactivities!.find((x) => x.reactivityId === id));
