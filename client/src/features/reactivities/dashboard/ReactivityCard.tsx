@@ -11,13 +11,9 @@ import { useReactivities } from "../../../lib/hooks/useReactivities";
 
 type Props = {
   reactivity: Reactivity;
-  selectReactivity: (id: string) => void;
 };
 
-export default function ReactivityCard({
-  reactivity,
-  selectReactivity,
-}: Props) {
+export default function ReactivityCard({ reactivity }: Props) {
   const { deleteReactivity } = useReactivities();
   return (
     <Card sx={{ borderRadius: 3 }}>
@@ -39,11 +35,7 @@ export default function ReactivityCard({
       >
         <Chip label={reactivity.category} variant="outlined" />
         <Box display="flex" gap={3}>
-          <Button
-            onClick={() => selectReactivity(reactivity.reactivityId)}
-            size="medium"
-            variant="contained"
-          >
+          <Button onClick={() => {}} size="medium" variant="contained">
             View
           </Button>
           <Button

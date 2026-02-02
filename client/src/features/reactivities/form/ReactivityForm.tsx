@@ -2,13 +2,9 @@ import { Box, Button, Paper, TextField, Typography } from "@mui/material";
 import type { FormEvent } from "react";
 import { useReactivities } from "../../../lib/hooks/useReactivities";
 
-type Props = {
-  reactivity?: Reactivity;
-  closeForm: () => void;
-};
-
-export default function ReactivityForm({ reactivity, closeForm }: Props) {
+export default function ReactivityForm() {
   const { updateReactivity, createReactivity } = useReactivities();
+  const reactivity = {} as Reactivity; // temporary reactivity object.
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault(); // prevent the default form submission behavior in the browser.
     const formData = new FormData(event.currentTarget);
@@ -19,10 +15,8 @@ export default function ReactivityForm({ reactivity, closeForm }: Props) {
     if (reactivity) {
       data.reactivityId = reactivity.reactivityId;
       await updateReactivity.mutateAsync(data as unknown as Reactivity);
-      closeForm();
     } else {
       await createReactivity.mutateAsync(data as unknown as Reactivity);
-      closeForm();
     }
   };
 
@@ -73,9 +67,7 @@ export default function ReactivityForm({ reactivity, closeForm }: Props) {
           defaultValue={reactivity?.venue}
         />
         <Box display="flex" justifyContent="end" gap={3}>
-          <Button onClick={closeForm} color="inherit">
-            Cancel
-          </Button>
+          <Button color="inherit">Cancel</Button>
           {/* Material UI v7 does come with a loading property. You can use this instead of disabled here to display a spinner on the button. */}
           <Button
             type="submit"

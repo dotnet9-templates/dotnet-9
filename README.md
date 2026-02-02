@@ -750,3 +750,18 @@ https://reactrouter.com/start/declarative/routing
 Testing client...nothing changes.
 
 === STARTING SECTION 7 part 66 ===
+
+removed all the code in App.tsx and replaced it with the route beccuase of props drilling and it is fixed by using the router.
+
+also getting rid of props drilling and using the router.
+
+This was a code cleanup section.
+
+Testing page still get list, but button is not working.
+we still need more work i.e. where to load components.
+
+<App> is the parent component and <Outlet> is the child component. We replaced App with <Outlet> in App.tsx. because we want to load the components from the router.
+
+Testing client...should have a default homepage and to see the list you need to put in url https://localhost:3001/reactivities
+
+=== STARTING SECTION 7 part 67 ===

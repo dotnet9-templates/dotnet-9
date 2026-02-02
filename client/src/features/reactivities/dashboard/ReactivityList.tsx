@@ -1,23 +1,15 @@
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import ReactivityCard from "./ReactivityCard";
+import { useReactivities } from "../../../lib/hooks/useReactivities";
 
-type Props = {
-  reactivities: Reactivity[];
-  selectReactivity: (id: string) => void;
-};
+export default function ReactivityList() {
+  const { reactivities, isPending } = useReactivities(); // using the hook to get the reactivities. this is a custom hook.
 
-export default function ReactivityList({
-  reactivities,
-  selectReactivity,
-}: Props) {
+  if (!reactivities || isPending) return <Typography>Loading...</Typography>;
   return (
     <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
       {reactivities.map((reactivity) => (
-        <ReactivityCard
-          key={reactivity.reactivityId}
-          reactivity={reactivity}
-          selectReactivity={selectReactivity}
-        />
+        <ReactivityCard key={reactivity.reactivityId} reactivity={reactivity} />
       ))}
     </Box>
   );
