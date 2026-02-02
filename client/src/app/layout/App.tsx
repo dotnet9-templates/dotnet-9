@@ -29,10 +29,6 @@ function App() {
     setEditMode(false);
   };
 
-  const handleDeleteReactivity = (id: string) => {
-    console.log(id);
-  };
-
   return (
     // minHeight: "100vh" is to make sure the box is at least the height of the viewport.
     <Box sx={{ bgcolor: "#eeeeee", minHeight: "100vh" }}>
@@ -50,7 +46,6 @@ function App() {
             editMode={editMode}
             openForm={handleOpenForm}
             closeForm={handleCloseForm}
-            deleteReactivity={handleDeleteReactivity}
           />
         )}
       </Container>
