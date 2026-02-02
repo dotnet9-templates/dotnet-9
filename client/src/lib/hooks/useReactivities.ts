@@ -1,3 +1,5 @@
+// These are mutation functions for the reactivities using react query.
+
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import agent from "../api/agent";
 
@@ -31,5 +33,20 @@ export const useReactivities = () => {
     },
   });
 
-  return { reactivities, isPending, updateReactivity, createReactivity };
+  const deleteReactivity = useMutation({
+    mutationFn: async (reactivityId: string) => {
+      await agent.delete(`/reactivity/${reactivityId}`);
+    },
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ["reactivities"] });
+    },
+  });
+
+  return {
+    reactivities,
+    isPending,
+    updateReactivity,
+    createReactivity,
+    deleteReactivity,
+  };
 };

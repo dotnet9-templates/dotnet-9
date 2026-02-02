@@ -719,3 +719,11 @@ creating a mutation with react query.
 Testing you should see the created reactivity on the list and details.
 
 === STARTING SECTION 6 part 62 ===
+
+Able to delete a reactivity from the list and details.
+
+also end for part 63
+
++++=== STARTING SECTION 7 ===+++
+
+=== STARTING SECTION 7 part 64 && 65 ===

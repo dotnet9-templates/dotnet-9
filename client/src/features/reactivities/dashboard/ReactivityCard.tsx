@@ -7,18 +7,18 @@ import {
   Chip,
   Typography,
 } from "@mui/material";
+import { useReactivities } from "../../../lib/hooks/useReactivities";
 
 type Props = {
   reactivity: Reactivity;
   selectReactivity: (id: string) => void;
-  deleteReactivity: (id: string) => void;
 };
 
 export default function ReactivityCard({
   reactivity,
   selectReactivity,
-  deleteReactivity,
 }: Props) {
+  const { deleteReactivity } = useReactivities();
   return (
     <Card sx={{ borderRadius: 3 }}>
       <CardContent>
@@ -47,7 +47,8 @@ export default function ReactivityCard({
             View
           </Button>
           <Button
-            onClick={() => deleteReactivity(reactivity.reactivityId)}
+            onClick={() => deleteReactivity.mutate(reactivity.reactivityId)}
+            disabled={deleteReactivity.isPending}
             color="error"
             size="medium"
             variant="contained"
