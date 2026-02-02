@@ -724,6 +724,29 @@ Able to delete a reactivity from the list and details.
 
 also end for part 63
 
-+++=== STARTING SECTION 7 ===+++
++++=== STARTING SECTION 7 part 64 ===+++
 
-=== STARTING SECTION 7 part 64 && 65 ===
+ROUTING
+react router hooks are
+useNavigate()
+useParams()
+use SearchParams()
+useLocation()
+and more . . .
+
+=== STARTING SECTION 7 part 65 ===
+
+NOTES: URL changed from today Feb 2, 2026 from last update from tutorial!!!
+
+We will be using react router.
+https://reactrouter.com
+https://reactrouter.com/start/declarative/installation
+
+npm i react-router BE SURE YOU'RE IN THE CLIENT FOLDER.
+"react-router": "^7.13.0"
+
+https://reactrouter.com/start/declarative/routing
+
+Testing client...nothing changes.
+
+=== STARTING SECTION 7 part 66 ===
