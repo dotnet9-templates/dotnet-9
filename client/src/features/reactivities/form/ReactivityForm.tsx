@@ -57,7 +57,11 @@ export default function ReactivityForm({ reactivity, closeForm }: Props) {
           name="date"
           label="Date"
           type="date"
-          defaultValue={reactivity?.date}
+          defaultValue={
+            reactivity?.date
+              ? new Date(reactivity.date).toISOString().split("T")[0]
+              : new Date().toISOString().split("T")[0]
+          } // this is to format the date to the ISO string format and automatically set the date in the input field.
         />
         <TextField name="city" label="City" defaultValue={reactivity?.city} />
         <TextField

@@ -36,7 +36,7 @@ export default function ReactivityDashboard({
       <Grid size={5}>
         {selectedReactivity && !editMode && (
           <ReactivityDetail
-            reactivity={selectedReactivity}
+            selectedReactivity={selectedReactivity}
             cancelSelectReactivity={cancelSelectReactivity}
             openForm={openForm}
           />

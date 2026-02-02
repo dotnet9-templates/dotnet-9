@@ -700,4 +700,16 @@ you can see the mutation in react query devtools. console, etc.
 
 the details wont show until refresh. . . . not mentioned in the video but is in the code.
 
+Testing with title and date for now.
+
 === STARTING SECTION 6 part 60 ===
+
+fixing date issue and details issue from previous section.
+
+in order for the list and activity details. we need to use the same reactivity from getting from react query state.
+
+testing on will now show the update on the list and details.
+
+fixed date...
+
+=== STARTING SECTION 6 part 61 ===

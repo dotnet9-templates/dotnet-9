@@ -6,18 +6,25 @@ import {
   CardMedia,
   Typography,
 } from "@mui/material";
+import { useReactivities } from "../../../lib/hooks/useReactivities";
 
 type Props = {
-  reactivity: Reactivity;
+  selectedReactivity: Reactivity;
   cancelSelectReactivity: () => void;
   openForm: (id: string) => void; // need id to open the form for the partcular reactivity.
 };
 
 export default function ReactivityDetail({
-  reactivity,
+  selectedReactivity,
   cancelSelectReactivity,
   openForm,
 }: Props) {
+  const { reactivities } = useReactivities();
+  const reactivity = reactivities?.find(
+    (x) => x.reactivityId === selectedReactivity.reactivityId,
+  );
+
+  if (!reactivity) return <Typography>Reactivity not found . . . </Typography>;
   return (
     <Card sx={{ borderRadius: 3 }}>
       <CardMedia
