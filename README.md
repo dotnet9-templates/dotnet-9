@@ -685,3 +685,19 @@ now the browser will have the loading delay of 1 second. because of the intercep
 remove the hardcoded url and use the agent for the base url.
 
 used a .env file to store the base url.
+
+=== STARTING SECTION 6 part 59 ===
+
+update an activity on client side browser with react query mutation and update on database.
+
+using react query to see the data explorer and seeing the data. Invalidate the cache to see the data updated on the database.
+
+Material UI v7 does come with a loading property. You can use this instead of disabled here to display a spinner on the button. -- comment is on the reactivity form.
+
+test on form, click view. click edit. change title. change date. click submit and we should see the title change on the list of cards but no the view for activity details component because of the temporary nature.
+
+you can see the mutation in react query devtools. console, etc.
+
+the details wont show until refresh. . . . not mentioned in the video but is in the code.
+
+=== STARTING SECTION 6 part 60 ===

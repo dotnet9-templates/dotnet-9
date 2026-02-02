@@ -1,16 +1,26 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import agent from "../api/agent";
 
 export const useReactivities = () => {
+  const queryClient = useQueryClient();
   // curly braces are destructuring the data from the response.
   // this is an array of reactivities.
   const { data: reactivities, isPending } = useQuery({
     queryKey: ["reactivities"],
     queryFn: async () => {
-      const response = await agent.get<Reactivity[]>("reactivity");
+      const response = await agent.get<Reactivity[]>("/reactivity");
       return response.data;
     },
   });
 
-  return { reactivities, isPending };
+  const updateReactivity = useMutation({
+    mutationFn: async (reactivity: Reactivity) => {
+      await agent.put("/reactivity", reactivity);
+    },
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ["reactivities"] }); // query key is declared in the useQuery hook.
+    },
+  });
+
+  return { reactivities, isPending, updateReactivity };
 };

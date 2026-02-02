@@ -29,25 +29,6 @@ function App() {
     setEditMode(false);
   };
 
-  const handleSubmitForm = (reactivity: Reactivity) => {
-    // if (reactivity.reactivityId) {
-    //   setReactivities(
-    //     reactivities.map((x) =>
-    //       x.reactivityId === reactivity.reactivityId ? reactivity : x,
-    //     ),
-    //   );
-    // } else {
-    //   const newReactivity = {
-    //     ...reactivity,
-    //     id: reactivities.length.toString(),
-    //   };
-    //   setSelectedReactivity(newReactivity); // this is to show the new reactivity in the detail view.
-    //   setReactivities([...reactivities, newReactivity]);
-    // }
-    console.log(reactivity); //to remove the warning about the reactivity being undefined.
-    setEditMode(false);
-  };
-
   const handleDeleteReactivity = (id: string) => {
     console.log(id);
   };
@@ -69,7 +50,6 @@ function App() {
             editMode={editMode}
             openForm={handleOpenForm}
             closeForm={handleCloseForm}
-            submitForm={handleSubmitForm}
             deleteReactivity={handleDeleteReactivity}
           />
         )}
