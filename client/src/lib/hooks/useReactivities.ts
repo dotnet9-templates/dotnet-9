@@ -1,9 +1,10 @@
-// These are mutation functions for the reactivities using react query.
+// Custom hook for fetching and mutating reactivities using React Query.
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import agent from "../api/agent";
 
-export const useReactivities = () => {
+// optional reactivityId to get individual reactivity.
+export const useReactivities = (reactivityId?: string) => {
   const queryClient = useQueryClient();
   // curly braces are destructuring the data from the response.
   // this is an array of reactivities.
@@ -13,6 +14,18 @@ export const useReactivities = () => {
       const response = await agent.get<Reactivity[]>("/reactivity");
       return response.data;
     },
+  });
+
+  // get reactivity by id i.e. individual reactivity.
+  const { data: reactivity, isLoading: isLoadingReactivity } = useQuery({
+    queryKey: ["reactivity", reactivityId],
+    queryFn: async () => {
+      const response = await agent.get<Reactivity>(
+        `/reactivity/${reactivityId}`,
+      );
+      return response.data;
+    },
+    enabled: !!reactivityId, // only run the query if reactivityId is provided.
   });
 
   const updateReactivity = useMutation({
@@ -48,5 +61,7 @@ export const useReactivities = () => {
     updateReactivity,
     createReactivity,
     deleteReactivity,
+    reactivity,
+    isLoadingReactivity,
   };
 };

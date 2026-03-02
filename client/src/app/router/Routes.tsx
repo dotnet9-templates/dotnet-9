@@ -12,7 +12,7 @@ export const router = createBrowserRouter([
     children: [
       { path: "", element: <HomePage /> },
       { path: "reactivities", element: <ReactivityDashboard /> },
-      { path: "reactivities/:id", element: <ReactivityDetail /> },
+      { path: "reactivities/:reactivityId", element: <ReactivityDetail /> }, // must match the reactivityId in the ReactivityDetail component.
       { path: "createActivity", element: <ReactivityForm /> },
     ],
   },

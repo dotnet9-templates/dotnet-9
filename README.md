@@ -790,3 +790,11 @@ after testing on client we should have the ability to click on the view button a
 ![image.png](image.png)
 
 === STARTING SECTION 7 part 69 ===
+
+entity id is on the url from the route to get from the API. unique.
+
+enabled: !!reactivityId, // only run the query if reactivityId is provided. without it see what happens when you refresh the page and you're on the detail page. it will try to get the reactivity and it will not find it and it will throw an error especially if you're using the react query devtools. you can also see the error in the console network tab fetc/xhr.
+
+once enabled is true, the query will run and you will see the reactivity in the detail page. you can see the query in the react query devtools. ["reactivity", null] will be disabled.
+
+=== STARTING SECTION 7 part 70 ===
