@@ -775,6 +775,18 @@ Understand how {children} works. when being passed as a prop to a component, it 
 the correct code for MenuItemLink file is type { ReactNode } from "react"; Verified from owners repo.
 https://github.com/TryCatchLearn/Reactivities/commit/30e1d245962c3b9d7803d2f321525269e31b3e6f#diff-1892cf650bcb5f9f189bd72a6eed3f739edd26fb230ccfff150b5eb116f2e726
 
+=== STARTING SECTION 7 part 68 ===
+
 Test on client should now show yellow highlighted text when the link is active for ony Reactivity and Create Reactivity links only.
 
-=== STARTING SECTION 7 part 68 ===
+two version of link and navigate on buttons on ReactivityDetail.tsx file.
+
+1. component={Link} to={`/reactivities/${reactivity.reactivityId}`}
+2. onClick={() => navigate("/reactivities")}
+
+component is more convenient than onClick because it's a react router link and will handle the navigation for you. the other requires a hook to navigate.
+
+after testing on client we should have the ability to click on the view button and navigate to the reactivity detail page. but with no data. just a card with edit and cancel buttons with no image. we should also see the id in the url.
+![image.png](image.png)
+
+=== STARTING SECTION 7 part 69 ===

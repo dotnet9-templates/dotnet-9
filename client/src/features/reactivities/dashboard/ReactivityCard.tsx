@@ -8,6 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useReactivities } from "../../../lib/hooks/useReactivities";
+import { Link } from "react-router";
 
 type Props = {
   reactivity: Reactivity;
@@ -35,7 +36,12 @@ export default function ReactivityCard({ reactivity }: Props) {
       >
         <Chip label={reactivity.category} variant="outlined" />
         <Box display="flex" gap={3}>
-          <Button onClick={() => {}} size="medium" variant="contained">
+          <Button
+            component={Link}
+            to={`/reactivities/${reactivity.reactivityId}`}
+            size="medium"
+            variant="contained"
+          >
             View
           </Button>
           <Button

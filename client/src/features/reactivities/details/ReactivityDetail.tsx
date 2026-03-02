@@ -6,23 +6,11 @@ import {
   CardMedia,
   Typography,
 } from "@mui/material";
-import { useReactivities } from "../../../lib/hooks/useReactivities";
+import { Link, useNavigate } from "react-router";
 
-type Props = {
-  selectedReactivity: Reactivity;
-  cancelSelectReactivity: () => void;
-  openForm: (id: string) => void; // need id to open the form for the partcular reactivity.
-};
-
-export default function ReactivityDetail({
-  selectedReactivity,
-  cancelSelectReactivity,
-  openForm,
-}: Props) {
-  const { reactivities } = useReactivities();
-  const reactivity = reactivities?.find(
-    (x) => x.reactivityId === selectedReactivity.reactivityId,
-  );
+export default function ReactivityDetail() {
+  const navigate = useNavigate();
+  const reactivity = {} as Reactivity;
 
   if (!reactivity) return <Typography>Reactivity not found . . . </Typography>;
   return (
@@ -40,12 +28,13 @@ export default function ReactivityDetail({
       </CardContent>
       <CardActions>
         <Button
-          onClick={() => openForm(reactivity.reactivityId)}
+          component={Link}
+          to={`/reactivities/${reactivity.reactivityId}`}
           color="primary"
         >
           Edit
         </Button>
-        <Button onClick={cancelSelectReactivity} color="inherit">
+        <Button onClick={() => navigate("/reactivities")} color="inherit">
           Cancel
         </Button>
       </CardActions>
