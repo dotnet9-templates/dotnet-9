@@ -1,10 +1,18 @@
 import { Box, Button, Paper, TextField, Typography } from "@mui/material";
 import type { FormEvent } from "react";
 import { useReactivities } from "../../../lib/hooks/useReactivities";
+import { useNavigate, useParams } from "react-router";
 
 export default function ReactivityForm() {
-  const { updateReactivity, createReactivity } = useReactivities();
-  const reactivity = {} as Reactivity; // temporary reactivity object.
+  const { reactivityId } = useParams(); // this will load the data from the API for the individual reactivity.
+  const {
+    updateReactivity,
+    createReactivity,
+    reactivity,
+    isLoadingReactivity,
+  } = useReactivities(reactivityId);
+  const navigate = useNavigate();
+
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault(); // prevent the default form submission behavior in the browser.
     const formData = new FormData(event.currentTarget);
@@ -15,10 +23,17 @@ export default function ReactivityForm() {
     if (reactivity) {
       data.reactivityId = reactivity.reactivityId;
       await updateReactivity.mutateAsync(data as unknown as Reactivity);
+      navigate(`/reactivities/${reactivity.reactivityId}`); // navigate to the detail page after updating.
     } else {
-      await createReactivity.mutateAsync(data as unknown as Reactivity);
+      await createReactivity.mutateAsync(data as unknown as Reactivity, {
+        onSuccess: (reactivityId) => {
+          navigate(`/reactivities/${reactivityId}`); // navigate to the detail page after creating.
+        },
+      });
     }
   };
+
+  if (isLoadingReactivity) return <Typography>Loading . . . </Typography>;
 
   return (
     <Paper sx={{ borderRadius: 3, padding: 3 }}>

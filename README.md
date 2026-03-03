@@ -798,3 +798,11 @@ enabled: !!reactivityId, // only run the query if reactivityId is provided. with
 once enabled is true, the query will run and you will see the reactivity in the detail page. you can see the query in the react query devtools. ["reactivity", null] will be disabled.
 
 === STARTING SECTION 7 part 70 ===
+
+changed the route to manage/:reactivityId to match the reactivityId in the ReactivityForm component. e.g. id vs reactivityId. because we are using useParams to get the reactivityId from the url.
+
+tested adding a route to the form to edit the reactivity. also tested the create reactivity form.
+
+one bug is the edit of the newly created reactivity, and then click on create reactivity, the data is not cleared.
+
+=== STARTING SECTION 7 part 71 ===

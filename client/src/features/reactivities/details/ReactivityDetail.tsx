@@ -33,7 +33,7 @@ export default function ReactivityDetail() {
       <CardActions>
         <Button
           component={Link}
-          to={`/reactivities/${reactivity.reactivityId}`}
+          to={`/manage/${reactivity.reactivityId}`}
           color="primary"
         >
           Edit

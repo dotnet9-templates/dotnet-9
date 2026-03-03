@@ -39,7 +39,8 @@ export const useReactivities = (reactivityId?: string) => {
 
   const createReactivity = useMutation({
     mutationFn: async (reactivity: Reactivity) => {
-      await agent.post("/reactivity", reactivity);
+      const response = await agent.post("/reactivity", reactivity);
+      return response.data;
     },
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ["reactivities"] });
