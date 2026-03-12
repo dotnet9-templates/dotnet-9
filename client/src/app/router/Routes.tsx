@@ -3,7 +3,7 @@ import App from "../layout/App";
 import HomePage from "../../home/HomePage";
 import ReactivityDashboard from "../../features/reactivities/dashboard/ReactivityDashboard";
 import ReactivityForm from "../../features/reactivities/form/ReactivityForm";
-import ReactivityDetail from "../../features/reactivities/details/ReactivityDetail";
+import ReactivityDetailPage from "../../features/reactivities/details/ReactivityDetailPage";
 
 export const router = createBrowserRouter([
   {
@@ -12,7 +12,7 @@ export const router = createBrowserRouter([
     children: [
       { path: "", element: <HomePage /> },
       { path: "reactivities", element: <ReactivityDashboard /> },
-      { path: "reactivities/:reactivityId", element: <ReactivityDetail /> }, // must match the reactivityId in the ReactivityDetail component.
+      { path: "reactivities/:reactivityId", element: <ReactivityDetailPage /> }, // must match the reactivityId in the ReactivityDetailPage component.
       { path: "createActivity", element: <ReactivityForm key="create" /> },
       { path: "manage/:reactivityId", element: <ReactivityForm /> }, // edit reactivity form. must match the reactivityId in the ReactivityForm component. e.g. id vs reactivityId.
     ],

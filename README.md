@@ -824,3 +824,7 @@ so change to slotProps={{ title: { fontWeight: "bold", fontSize: 20 } }}
 Why: MUI v7 migrated from legacy xxxProps shorthand props to a unified slotProps API. slotProps lets you pass props to any internal sub-component slot (title, subheader, avatar, action) in one place, which is more consistent and composable than the old individual titleTypographyProps, subheaderTypographyProps, etc. props that existed before.
 
 === STARTING SECTION 8 part 75 ===
+
+creating cards and exportable components for the details page.
+
+=== STARTING SECTION 8 part 76 ===
