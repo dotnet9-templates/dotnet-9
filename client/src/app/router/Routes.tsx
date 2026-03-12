@@ -13,7 +13,7 @@ export const router = createBrowserRouter([
       { path: "", element: <HomePage /> },
       { path: "reactivities", element: <ReactivityDashboard /> },
       { path: "reactivities/:reactivityId", element: <ReactivityDetail /> }, // must match the reactivityId in the ReactivityDetail component.
-      { path: "createActivity", element: <ReactivityForm /> },
+      { path: "createActivity", element: <ReactivityForm key="create" /> },
       { path: "manage/:reactivityId", element: <ReactivityForm /> }, // edit reactivity form. must match the reactivityId in the ReactivityForm component. e.g. id vs reactivityId.
     ],
   },

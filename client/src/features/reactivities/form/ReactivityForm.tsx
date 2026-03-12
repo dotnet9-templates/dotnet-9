@@ -38,7 +38,12 @@ export default function ReactivityForm() {
   return (
     <Paper sx={{ borderRadius: 3, padding: 3 }}>
       <Typography variant="h5" gutterBottom color="primary">
-        Create Reactivity
+        {/* Using reactivityId directly could technically work too (since it's
+        undefined on create and a string on edit), but reactivity is the better
+        check because it confirms the data actually loaded — which is also why
+        there's the isLoadingReactivity guard on line 36 before rendering the
+        form. */}
+        {reactivity ? "Edit Reactivity" : "Create Reactivity"}
       </Typography>
       <Box
         component="form"
