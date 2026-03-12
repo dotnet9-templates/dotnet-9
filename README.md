@@ -805,4 +805,22 @@ tested adding a route to the form to edit the reactivity. also tested the create
 
 one bug is the edit of the newly created reactivity, and then click on create reactivity, the data is not cleared.
 
-=== STARTING SECTION 7 part 71 ===
+=== STARTING SECTION 7 part 71 & 72 ===
+
+fixing the bug of the edit of the newly created reactivity, and then click on create reactivity, the data is not cleared.
+
+use {reactivity} ? "Edit Reactivity" : "Create Reactivity" to show the correct title in the ReactivityForm component.
+
+instead of using reactivityId directly, use reactivity to show the correct title in the ReactivityForm component.
+
+=== STARTING SECTION 8 part 73 & 74 ===
+
+titleTypographyProps={{ fontWeight: "bold", fontSize: 20 }}
+
+titleTypographyProps is deprecated . . . because of the new version of material ui. MUI v7 does not have this property.
+
+so change to slotProps={{ title: { fontWeight: "bold", fontSize: 20 } }}
+
+Why: MUI v7 migrated from legacy xxxProps shorthand props to a unified slotProps API. slotProps lets you pass props to any internal sub-component slot (title, subheader, avatar, action) in one place, which is more consistent and composable than the old individual titleTypographyProps, subheaderTypographyProps, etc. props that existed before.
+
+=== STARTING SECTION 8 part 75 ===
