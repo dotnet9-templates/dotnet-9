@@ -2,10 +2,12 @@
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import agent from "../api/agent";
+import { useLocation } from "react-router";
 
 // optional reactivityId to get individual reactivity.
 export const useReactivities = (reactivityId?: string) => {
   const queryClient = useQueryClient();
+  const location = useLocation();
   // curly braces are destructuring the data from the response.
   // this is an array of reactivities.
   const { data: reactivities, isPending } = useQuery({
@@ -14,6 +16,7 @@ export const useReactivities = (reactivityId?: string) => {
       const response = await agent.get<Reactivity[]>("/reactivity");
       return response.data;
     },
+    enabled: !reactivityId && location.pathname === "/reactivities",
   });
 
   // get reactivity by id i.e. individual reactivity.

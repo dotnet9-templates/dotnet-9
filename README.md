@@ -880,3 +880,13 @@ A lot of this are examples and most of it ths solution was from the owner's repo
 Add a loading state to the app by creating a ui store.
 
 Position abosolute needs to be relative to the parent element.
+
+=== STARTING SECTION 9 part 89 && 90===
+
+react query fetching.
+
+for this section we need to use the react query devtools to see the data fetching and clicked on Reactivities you can see the data fetching becoming stale in react query devtools.
+
+For this whole section, we utilized the solution from the owner's repo. https://github.com/TryCatchLearn/Reactivities/commit/92e9cd38d537906590afa86a1452aa6aba860a4b
+
+=== STARTING SECTION 10 part 91 ===
