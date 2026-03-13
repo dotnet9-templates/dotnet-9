@@ -1,5 +1,6 @@
 import { CalendarToday, Info, Place } from "@mui/icons-material";
 import { Divider, Grid, Paper, Typography } from "@mui/material";
+import { formatDate } from "../../../lib/util/util";
 
 type Props = {
   reactivity: Reactivity;
@@ -22,7 +23,7 @@ export default function ReactivityDetailsInfo({ reactivity }: Props) {
           <CalendarToday color="info" fontSize="large" />
         </Grid>
         <Grid size={11}>
-          <Typography>{reactivity.date}</Typography>
+          <Typography>{formatDate(reactivity.date)}</Typography>
         </Grid>
       </Grid>
       <Divider />

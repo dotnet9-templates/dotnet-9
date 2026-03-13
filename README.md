@@ -845,4 +845,14 @@ Solution can be found in the owner's repo. Since it's faster. Also he does use G
 https://github.com/TryCatchLearn/Reactivities/commits/main/
 For the calendar, we need to add a css file to the project. Check styles.css
 
-=== STARTING SECTION 8 part 78 ===
+=== STARTING SECTION 8 part 78 && 79 && 80 ===
+
+HomePage creation and dates.
+
+for dates we're using date-fns to format the dates. go to website date-fns.org
+
+therefore install date-fns npm i date-fns
+
+put date in util.ts file and use it in the ReactivityCard component and others.
+
+=== STARTING SECTION 9 part 81 ===

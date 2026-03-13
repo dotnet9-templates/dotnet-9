@@ -11,6 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Link } from "react-router";
+import { formatDate } from "../../../lib/util/util";
 
 type Props = {
   reactivity: Reactivity;
@@ -49,12 +50,17 @@ export default function ReactivityCard({ reactivity }: Props) {
       <Divider sx={{ mb: 3 }} />
       <CardContent sx={{ p: 0 }}>
         <Box display="flex" alignItems="center" mb={2} px={2}>
-          <AccessTime sx={{ mr: 1 }} />
-          <Typography variant="body2">{reactivity.date}</Typography>
+          <Box display="flex" flexGrow={0} alignItems="center">
+            <AccessTime sx={{ mr: 1 }} />
+            <Typography variant="body2" noWrap>
+              {formatDate(reactivity.date)}
+            </Typography>
+          </Box>
+
           <Place sx={{ ml: 3, mr: 1 }} />
           <Typography variant="body2">{reactivity.venue}</Typography>
         </Box>
-        <Divider />
+
         <Box
           display="flex"
           gap={2}
