@@ -871,4 +871,8 @@ Lesson 82 is useful to understand the difference between mobx and react query.
 Setting up mobx in the client folder. https://mobx.js.org/README.html
 npm i mobx mobx-react-lite This version is 4.1.1 old is 4.1.0
 
-=== STARTING SECTION 9 part 84 ===
+=== STARTING SECTION 9 part 84 && 85 && 86 && 87 ===
+
+A lot of this are examples and most of it ths solution was from the owner's repo.
+
+=== STARTING SECTION 9 part 88 ===
