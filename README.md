@@ -839,3 +839,10 @@ be sure to change some hardcoded values to the reactivity object.
 next is adding filters with no functionality yet.
 
 === STARTING SECTION 8 part 77 ===
+
+Solution can be found in the owner's repo. Since it's faster. Also he does use Grid instead of Grid2.
+
+https://github.com/TryCatchLearn/Reactivities/commits/main/
+For the calendar, we need to add a css file to the project. Check styles.css
+
+=== STARTING SECTION 8 part 78 ===
