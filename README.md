@@ -876,3 +876,7 @@ npm i mobx mobx-react-lite This version is 4.1.1 old is 4.1.0
 A lot of this are examples and most of it ths solution was from the owner's repo.
 
 === STARTING SECTION 9 part 88 ===
+
+Add a loading state to the app by creating a ui store.
+
+Position abosolute needs to be relative to the parent element.
