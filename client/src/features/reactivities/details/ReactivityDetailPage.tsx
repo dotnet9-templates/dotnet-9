@@ -16,8 +16,8 @@ export default function ReactivityDetailPage() {
   return (
     <Grid container spacing={3}>
       <Grid size={8}>
-        <ReactivityDetailsHeader />
-        <ReactivityDetailsInfo />
+        <ReactivityDetailsHeader reactivity={reactivity} />
+        <ReactivityDetailsInfo reactivity={reactivity} />
         <ReactivityDetailsChat />
       </Grid>
       <Grid size={4}>

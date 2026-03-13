@@ -828,3 +828,14 @@ Why: MUI v7 migrated from legacy xxxProps shorthand props to a unified slotProps
 creating cards and exportable components for the details page.
 
 === STARTING SECTION 8 part 76 ===
+
+Use snippets and change to appropriate names.
+Grid2 is now Grid
+
+test the header to change isCancelled to true and see the badge and loading to true.
+
+be sure to change some hardcoded values to the reactivity object.
+
+next is adding filters with no functionality yet.
+
+=== STARTING SECTION 8 part 77 ===
