@@ -852,7 +852,23 @@ HomePage creation and dates.
 for dates we're using date-fns to format the dates. go to website date-fns.org
 
 therefore install date-fns npm i date-fns
+"date-fns": "^4.1.0"
 
 put date in util.ts file and use it in the ReactivityCard component and others.
 
-=== STARTING SECTION 9 part 81 ===
+=== STARTING SECTION 9 part 81 & 82 & 83 ===
+
+mobx is for client side state management.
+react query is for server side state management asynchronous data fetching.
+mobx react lite is to observe the state that's inside our mob stores.
+
+mobx for async states means manually observing the state that's inside our mob stores and caching. This is why we use react query for async states.
+
+MobX functions: observable, computed properties, action, Reactions, AutoRun which is similar to Reaction but does not wait for the state to change.
+
+Lesson 82 is useful to understand the difference between mobx and react query.
+
+Setting up mobx in the client folder. https://mobx.js.org/README.html
+npm i mobx mobx-react-lite This version is 4.1.1 old is 4.1.0
+
+=== STARTING SECTION 9 part 84 ===
