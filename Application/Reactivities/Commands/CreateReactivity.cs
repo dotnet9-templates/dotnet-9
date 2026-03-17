@@ -1,3 +1,5 @@
+using Application.Reactivities.DTOs;
+using AutoMapper;
 using Domain;
 using MediatR;
 using Persistence;
@@ -6,26 +8,32 @@ namespace Application.Reactivities.Commands
 {
     public class CreateReactivity
     {
-        // This command returns a string, which represents the newly created ReactivityId.
-        // Although commands in CQRS often return Unit, MediatR allows commands to return values,
-        // and returning an identifier is a common and valid pattern.
+        // Command returns a string (the new ReactivityId) rather than Unit.
+        // In strict CQRS, commands don't return values — but MediatR allows it,
+        // and returning the new ID is a practical pattern that lets the controller
+        // redirect or respond with the created resource's identifier.
         public class Command : IRequest<string>
         {
-            public required Reactivity Reactivity { get; set; }
+            // The DTO carries only the fields the client is allowed to supply.
+            // ReactivityId is deliberately absent from CreateReactivityDto —
+            // the domain entity generates its own ID server-side.
+            public required CreateReactivityDto ReactivityDto { get; set; }
         }
 
-        public class Handler(AppDbContext context) : IRequestHandler<Command, string>
+        public class Handler(AppDbContext context, IMapper mapper) : IRequestHandler<Command, string>
         {
             public async Task<string> Handle(Command request, CancellationToken cancellationToken)
             {
-                context.Reactivities.Add(request.Reactivity);
+                // AutoMapper copies matching properties from the DTO onto a new Reactivity entity.
+                // Because ReactivityId is not on the DTO, the entity keeps its own Guid.NewGuid() value.
+                var reactivity = mapper.Map<Reactivity>(request.ReactivityDto);
+                context.Reactivities.Add(reactivity);
 
                 await context.SaveChangesAsync(cancellationToken);
 
-                // Return the ReactivityId after the entity has been persisted.
-                // This value can be used by the controller (e.g., for routing or follow-up actions),
-                // without returning the full entity to the client.
-                return request.Reactivity.ReactivityId;
+                // reactivity.ReactivityId — must reference the object property, not a bare variable.
+                // Returned to the controller so it can include the new ID in the response.
+                return reactivity.ReactivityId;
             }
         }
     }

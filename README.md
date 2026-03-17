@@ -889,4 +889,91 @@ for this section we need to use the react query devtools to see the data fetchin
 
 For this whole section, we utilized the solution from the owner's repo. https://github.com/TryCatchLearn/Reactivities/commit/92e9cd38d537906590afa86a1452aa6aba860a4b
 
-=== STARTING SECTION 10 part 91 ===
+=== STARTING SECTION 10 part 91 & 92 — DTOs, Validation & Domain ID ===
+
+## What Changed in This Lesson
+
+### 1. Domain — ReactivityId replaces Title as the primary key
+
+`Domain/Reactivity.cs` previously used `Title` as the `[Key]`. This is bad practice because:
+
+- Business fields like titles are not guaranteed to be unique
+- Titles can change, which would break foreign key relationships
+
+Changed to a dedicated `ReactivityId` property that auto-generates a GUID server-side:
+
+```
+public string ReactivityId { get; set; } = Guid.NewGuid().ToString();
+```
+
+EF Core recognizes `ReactivityId` as the primary key by convention (`<TypeName>Id`), so `[Key]` is kept for explicitness but is technically redundant.
+
+After changing the domain model, a new EF Core migration is required since the database schema changed:
+
+```
+dotnet ef migrations add AddReactivityId -p Persistence -s API
+dotnet ef database update -p Persistence -s API
+```
+
+---
+
+### 2. CreateReactivityDto — ReactivityId removed, `required` replaced with `[Required]`
+
+**ReactivityId removed from the DTO:**
+The client should never supply an ID for a new resource. If the DTO included `ReactivityId`, AutoMapper would map it onto the domain entity and overwrite the server-generated value — a security and data integrity risk. The server owns ID generation.
+
+**`required` keyword replaced with `[Required]` data annotation:**
+The C# `required` keyword enforces compile-time non-nullability but does not produce useful HTTP validation error responses. `[Required]` from `System.ComponentModel.DataAnnotations` integrates with ASP.NET Core's model validation pipeline and produces clear field-level 400 errors visible in Postman/clients.
+
+---
+
+### 3. Postman Testing
+
+Set `{{url}}` = `https://localhost:5001` in your Postman environment.
+
+**Test all CRUD endpoints:**
+
+- GET `{{url}}/api/reactivity`
+- GET `{{url}}/api/reactivity/{id}`
+- POST `{{url}}/api/reactivity`
+- PUT `{{url}}/api/reactivity`
+- DELETE `{{url}}/api/reactivity/{id}`
+
+**Expected POST with empty body — 400 Bad Request (old `required` keyword error):**
+
+```json
+{
+  "type": "https://tools.ietf.org/html/rfc9110#section-15.5.1",
+  "title": "One or more validation errors occurred.",
+  "status": 400,
+  "errors": {
+    "$": [
+      "JSON deserialization for type 'Application.Reactivities.DTOs.CreateReactivityDto' was missing required properties including: 'title', 'description', 'category', 'city', 'venue'."
+    ],
+    "reactivityDto": ["The reactivityDto field is required."]
+  }
+}
+```
+
+**Expected POST with empty body — 400 Bad Request (after switching to `[Required]` annotations):**
+
+```json
+{
+  "type": "https://tools.ietf.org/html/rfc9110#section-15.5.1",
+  "title": "One or more validation errors occurred.",
+  "status": 400,
+  "errors": {
+    "City": ["The City field is required."],
+    "Title": ["The Title field is required."],
+    "Venue": ["The Venue field is required."],
+    "Category": ["The Category field is required."],
+    "Description": ["The Description field is required."]
+  }
+}
+```
+
+The `[Required]` approach gives per-field errors, which is far more useful for clients than the generic deserialization error from `required`.
+
+These are data annotations — a simple validation approach. Fluent Validation is the more powerful alternative for complex rules but is not used here.
+
+=== STARTING SECTION 10 part 93 ===

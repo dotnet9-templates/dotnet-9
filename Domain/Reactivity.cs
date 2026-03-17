@@ -1,14 +1,15 @@
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace Domain
 {
     public class Reactivity
     {
-        // primary key, if we leave it as Id, it will be the primary key by default.
+        // Changed from using Title as [Key] to a dedicated ReactivityId property.
+        // Using a business field like Title as a primary key is bad practice — titles can change
+        // and aren't guaranteed unique. ReactivityId matches EF Core's <TypeName>Id convention,
+        // so [Key] is technically redundant but kept here for explicitness.
+        // The server generates this value — it is never supplied by the client.
         [Key]
         public string ReactivityId { get; set; } = Guid.NewGuid().ToString();
         public required string Title { get; set; }
