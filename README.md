@@ -1053,4 +1053,104 @@ FluentValidation.ValidationException: Validation failed:
 
 This confirms FluentValidation is working correctly — it's just not yet mapped to a proper HTTP error response. That will be handled in a future lesson with exception handling middleware.
 
+---
+
 === STARTING SECTION 10 part 94 ===
+
+### What this lesson covers
+
+Instead of injecting `IValidator<T>` directly into every command handler, this lesson introduces a **MediatR pipeline behavior** that runs FluentValidation automatically for any request that has a registered validator. This keeps handlers clean — they contain only business logic and database operations.
+
+### Key concept: MediatR Pipeline Behaviors
+
+A pipeline behavior implements `IPipelineBehavior<TRequest, TResponse>` and wraps every MediatR request/response pair, similar to ASP.NET middleware but scoped to the application layer. Behaviors are composed in a chain; each one calls `next()` to pass control to the next behavior or the handler itself.
+
+### Files changed
+
+#### `Application/Core/ValidationBehavior.cs` (new)
+
+A generic open behavior registered once in `Program.cs`. It resolves an `IValidator<TRequest>` from DI — if none exists for a given request type it passes straight through, so queries and other commands without validators are unaffected.
+
+```csharp
+public class ValidationBehavior<TRequest, TResponse>(IValidator<TRequest>? validator = null)
+    : IPipelineBehavior<TRequest, TResponse> where TRequest : notnull
+{
+    public async Task<TResponse> Handle(...)
+    {
+        if (validator == null) return await next(cancellationToken);
+
+        var validationResult = await validator.ValidateAsync(request, cancellationToken);
+
+        if (!validationResult.IsValid)
+            throw new ValidationException(validationResult.Errors);
+
+        return await next(cancellationToken);
+    }
+}
+```
+
+#### `Application/Reactivities/Validators/CreateReactivityValidator.cs` (new)
+
+FluentValidation validator for `CreateReactivity.Command`. Rules are defined here once and enforced before the handler ever executes.
+
+```csharp
+public sealed class CreateReactivityValidator : AbstractValidator<CreateReactivity.Command>
+{
+    public CreateReactivityValidator()
+    {
+        RuleFor(x => x.ReactivityDto.Title).NotEmpty();
+        RuleFor(x => x.ReactivityDto.Description).NotEmpty();
+        // ... etc.
+    }
+}
+```
+
+#### `Program.cs` — two additions
+
+```csharp
+// 1. Register ValidationBehavior as an open generic pipeline behavior.
+//    MediatR automatically applies it to every IRequest<TResponse> in the assembly.
+x.AddOpenBehavior(typeof(ValidationBehavior<,>));
+
+// 2. Scan the Application assembly and register all AbstractValidator<T> implementations.
+builder.Services.AddValidatorsFromAssemblyContaining<CreateReactivityValidator>();
+```
+
+### How the pipeline flows
+
+```
+POST /api/reactivities
+    │
+    ▼
+ReactivityController.CreateReactivity()
+    │  sends Command via MediatR
+    ▼
+ValidationBehavior<Command, string>.Handle()
+    │  resolves CreateReactivityValidator from DI
+    │  calls ValidateAsync(request)
+    │  ──► invalid? throws ValidationException (list of field errors)
+    │  ──► valid?  calls next()
+    ▼
+CreateReactivity.Handler.Handle()
+    │  maps DTO → domain entity via AutoMapper
+    │  saves to database
+    ▼
+returns new ReactivityId
+```
+
+### Postman result at this stage
+
+Sending an empty `{}` body returns a **500** because there is no global exception handler yet to catch `ValidationException` and convert it to a 400. The terminal shows that validation **is** firing correctly:
+
+```
+FluentValidation.ValidationException: Validation failed:
+-- ReactivityDto.Title: Title is required Severity: Error
+-- ReactivityDto.Description: Description is required Severity: Error
+-- ReactivityDto.Category: Category is required Severity: Error
+-- ReactivityDto.City: City is required Severity: Error
+-- ReactivityDto.Venue: Venue is required Severity: Error
+```
+
+This confirms the pipeline behavior is working. The 500 will be resolved in the next lesson by adding **exception handling middleware** that maps `ValidationException` to a proper `400 Bad Request` response with field-level error details.
+
+=== STARTING SECTION 10 part 95 ===

@@ -7,36 +7,48 @@ using Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
-builder.Services.AddDbContext<AppDbContext>( options => {
-    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")); //this is the connection string from the appsettings.json file. to use for the sqlite database.
+
+builder.Services.AddDbContext<AppDbContext>(options =>
+{
+    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
-// Add CORS policy
 builder.Services.AddCors();
 
-// Add MediatR to the container, to know the location of the handlers.
-builder.Services.AddMediatR(x => x.RegisterServicesFromAssemblyContaining<GetReactivityList.Handler>());
+// Register MediatR and scan the assembly containing GetReactivityList.Handler for all
+// IRequestHandler implementations. AddOpenBehavior wraps every request/response pair
+// with ValidationBehavior so FluentValidation runs automatically before each handler —
+// no manual validator injection needed per handler.
+builder.Services.AddMediatR(x =>
+{
+    x.RegisterServicesFromAssemblyContaining<GetReactivityList.Handler>();
+    x.AddOpenBehavior(typeof(ValidationBehavior<,>));
+});
 
-// Add AutoMapper to the container.
-builder.Services.AddAutoMapper(typeof(MappingProfiles).Assembly);
-builder.Services.AddValidatorsFromAssemblyContaining<CreateRectivityValidator>();
+// Register AutoMapper and explicitly add the MappingProfiles profile.
+// cfg.AddMaps(assembly) can be used instead to auto-discover all Profile subclasses.
+builder.Services.AddAutoMapper(cfg => cfg.AddProfile<MappingProfiles>());
+
+// Scan the assembly containing CreateReactivityValidator and register all
+// AbstractValidator<T> implementations with the DI container so MediatR's
+// ValidationBehavior can resolve them automatically.
+builder.Services.AddValidatorsFromAssemblyContaining<CreateReactivityValidator>();
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-app.UseCors( options => options.AllowAnyMethod().AllowAnyHeader().WithOrigins("http://localhost:3001", "https://localhost:3001"));
+app.UseCors(options =>
+    options.AllowAnyMethod()
+           .AllowAnyHeader()
+           .WithOrigins("http://localhost:3001", "https://localhost:3001"));
 
 // app.UseHttpsRedirection();
-
 // app.UseAuthorization();
 
 app.MapControllers();
 
-
-// Database initialization at startup: apply pending migrations and seed initial data.
-// The 'using' statement ensures the service scope is properly disposed after initialization.
+// Apply any pending EF Core migrations and seed initial data at startup.
+// A scoped service provider is used so the DbContext is properly disposed after seeding.
 using var scope = app.Services.CreateScope();
 var services = scope.ServiceProvider;
 
