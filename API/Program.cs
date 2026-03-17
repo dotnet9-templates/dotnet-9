@@ -1,3 +1,4 @@
+using API.Middleware;
 using Application.Core;
 using Application.Queries;
 using Application.Reactivities.Validators;
@@ -34,9 +35,11 @@ builder.Services.AddAutoMapper(cfg => cfg.AddProfile<MappingProfiles>());
 // AbstractValidator<T> implementations with the DI container so MediatR's
 // ValidationBehavior can resolve them automatically.
 builder.Services.AddValidatorsFromAssemblyContaining<CreateReactivityValidator>();
+builder.Services.AddTransient<ExceptionMiddleware>(); // transient service is a service that is created once and then disposed of after use. Used when needed.
 
 var app = builder.Build();
 
+app.UseMiddleware<ExceptionMiddleware>();
 app.UseCors(options =>
     options.AllowAnyMethod()
            .AllowAnyHeader()

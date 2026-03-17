@@ -1154,3 +1154,36 @@ FluentValidation.ValidationException: Validation failed:
 This confirms the pipeline behavior is working. The 500 will be resolved in the next lesson by adding **exception handling middleware** that maps `ValidationException` to a proper `400 Bad Request` response with field-level error details.
 
 === STARTING SECTION 10 part 95 ===
+
+Used ExceptionMiddleware Solution from https://github.com/TryCatchLearn/Reactivities/blob/6555456b9510ad8ffbd208b29de131d6e8d3f364/API/Middleware/ExceptionMiddleware.cs
+and with the help of AppException https://github.com/TryCatchLearn/Reactivities/blob/6555456b9510ad8ffbd208b29de131d6e8d3f364/Application/Core/AppException.cs
+
+after testing on postman, we get the following error:
+
+{
+"type": "ValidationFailure",
+"title": "Validation error",
+"status": 400,
+"detail": "One or more validation errors has occurred",
+"errors": {
+"ReactivityDto.Title": [
+"Title is required"
+],
+"ReactivityDto.Description": [
+"Description is required"
+],
+"ReactivityDto.Category": [
+"Category is required"
+],
+"ReactivityDto.City": [
+"City is required"
+],
+"ReactivityDto.Venue": [
+"Venue is required"
+]
+}
+}
+
+next is handling other API error responses.
+
+=== STARTING SECTION 10 part 96 ===
