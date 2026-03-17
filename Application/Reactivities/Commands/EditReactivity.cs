@@ -1,5 +1,6 @@
+using Application.Core;
+using Application.Reactivities.DTOs;
 using AutoMapper;
-using Domain;
 using MediatR;
 using Persistence;
 
@@ -7,19 +8,26 @@ namespace Application.Reactivities.Commands
 {
     public class EditReactivity
     {
-        public class Command: IRequest
+        public class Command : IRequest<Result<Unit>>
         {
-            public required Reactivity Reactivity { get; set; }
+            public required EditReactivityDto ReactivityDto { get; set; }
         }
-        public class Handler(AppDbContext context, IMapper mapper) : IRequestHandler<Command>
+
+        public class Handler(AppDbContext context, IMapper mapper) : IRequestHandler<Command, Result<Unit>>
         {
-            public async Task Handle(Command request, CancellationToken cancellationToken)
+            public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
             {
-                var reactivity = await context.Reactivities.FindAsync([request.Reactivity.ReactivityId], cancellationToken) ?? throw new Exception("Reactivity not found");
+                var reactivity = await context.Reactivities.FindAsync([request.ReactivityDto.ReactivityId], cancellationToken);
 
-                mapper.Map(request.Reactivity, reactivity);
+                if (reactivity == null) return Result<Unit>.Failure("Reactivity not found", 404);
 
-                await context.SaveChangesAsync(cancellationToken);
+                mapper.Map(request.ReactivityDto, reactivity);
+
+                var result = await context.SaveChangesAsync(cancellationToken) > 0;
+
+                if (!result) return Result<Unit>.Failure("Failed to update the reactivity", 400);
+
+                return Result<Unit>.Success(Unit.Value);
             }
         }
     }

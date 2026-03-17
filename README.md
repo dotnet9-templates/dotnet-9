@@ -1188,7 +1188,7 @@ next is handling other API error responses.
 
 === STARTING SECTION 10 part 96, 97 ===
 
-For handlers!
+For handlers! parts 1 and 2 of 3.
 
 Solution for Core is from https://github.com/TryCatchLearn/Reactivities/blob/6555456b9510ad8ffbd208b29de131d6e8d3f364/Application/Core/Result.cs
 
@@ -1206,3 +1206,19 @@ Testing module 10 get: postman result is
 }
 
 === STARTING SECTION 10 part 98 ===
+
+last part of handling api response part 3 or 3.
+
+Delete Solution: https://github.com/TryCatchLearn/Reactivities/blob/6555456b9510ad8ffbd208b29de131d6e8d3f364/Application/Activities/Commands/DeleteActivity.cs
+
+Edit Solution: https://github.com/TryCatchLearn/Reactivities/blob/6555456b9510ad8ffbd208b29de131d6e8d3f364/Application/Activities/Commands/EditActivitiy.cs
+
+Edit DTO Solution: https://github.com/TryCatchLearn/Reactivities/blob/6555456b9510ad8ffbd208b29de131d6e8d3f364/Application/Activities/DTOs/EditActivityDto.cs
+
+Base Reactivity DTO Solution: https://github.com/TryCatchLearn/Reactivities/blob/6555456b9510ad8ffbd208b29de131d6e8d3f364/Application/Activities/DTOs/BaseActivityDto.cs
+
+lesson 99 has Ihost to know if running in development or production . . .
+
+lesson 100 has the validators . . . and I just used teh solutions at this point from the owner's repo. Just all the validators folders.
+
+lesson 101 hits the base files i.e. DTO bases...validators bases...etc.

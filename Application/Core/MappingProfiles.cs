@@ -18,6 +18,7 @@ namespace Application.Core
             // ReactivityId is not present on the DTO, so AutoMapper leaves the domain entity's
             // server-generated ReactivityId untouched.
             CreateMap<CreateReactivityDto, Reactivity>();
+            CreateMap<EditReactivityDto, Reactivity>();
         }
     }
 }

@@ -1,3 +1,4 @@
+
 namespace Application.Reactivities.DTOs;
 
 // DTO used when the client submits a POST request to create a new reactivity.
@@ -10,14 +11,6 @@ namespace Application.Reactivities.DTOs;
 //
 // Field-level validation (NotEmpty, etc.) is handled by CreateReactivityValidator
 // via the MediatR ValidationBehavior pipeline, so no [Required] attributes are needed here.
-public class CreateReactivityDto
+public class CreateReactivityDto : BaseReactivityDto
 {
-    public string Title { get; set; } = string.Empty;
-    public DateTime Date { get; set; }
-    public string Description { get; set; } = string.Empty;
-    public string Category { get; set; } = string.Empty;
-    public string City { get; set; } = string.Empty;
-    public string Venue { get; set; } = string.Empty;
-    public double Latitude { get; set; }
-    public double Longitude { get; set; }
 }
