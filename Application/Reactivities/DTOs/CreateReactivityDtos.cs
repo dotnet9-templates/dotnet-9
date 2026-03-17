@@ -1,5 +1,3 @@
-using System.ComponentModel.DataAnnotations;
-
 namespace Application.Reactivities.DTOs;
 
 // DTO used when the client submits a POST request to create a new reactivity.
@@ -16,19 +14,15 @@ public class CreateReactivityDto
         // The 'required' keyword does not serialize validation errors in a client-friendly way.
         // [Required] from System.ComponentModel.DataAnnotations produces clear, field-level
         // 400 Bad Request errors (e.g. "The Title field is required.") visible in Postman/clients.
-        [Required]
-        public string Title { get; set; } = "";
-        [Required]
-        public DateTime Date { get; set; }
-        [Required]
-        public string Description { get; set; } = string.Empty;
-        [Required]
-        public string Category { get; set; } = string.Empty;
 
+        // [Required] tag no longer needed as we're using fluent validation.
+        
+        public string Title { get; set; } = "";
+        public DateTime Date { get; set; }
+        public string Description { get; set; } = string.Empty;
+        public string Category { get; set; } = string.Empty;
         // location props
-        [Required]
         public string City { get; set; } = string.Empty;
-        [Required]
         public string Venue { get; set; } = string.Empty;
         public double Latitude { get; set; }
         public double Longitude { get; set; }

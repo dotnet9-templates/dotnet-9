@@ -1,6 +1,7 @@
 using Application.Reactivities.DTOs;
 using AutoMapper;
 using Domain;
+using FluentValidation;
 using MediatR;
 using Persistence;
 
@@ -20,10 +21,13 @@ namespace Application.Reactivities.Commands
             public required CreateReactivityDto ReactivityDto { get; set; }
         }
 
-        public class Handler(AppDbContext context, IMapper mapper) : IRequestHandler<Command, string>
+        // Handler receives the Command and returns a string (the new ReactivityId).
+        public class Handler(AppDbContext context, IMapper mapper, IValidator<Command> validator) : IRequestHandler<Command, string>
         {
             public async Task<string> Handle(Command request, CancellationToken cancellationToken)
             {
+
+                await validator.ValidateAndThrowAsync(request, cancellationToken);
                 // AutoMapper copies matching properties from the DTO onto a new Reactivity entity.
                 // Because ReactivityId is not on the DTO, the entity keeps its own Guid.NewGuid() value.
                 var reactivity = mapper.Map<Reactivity>(request.ReactivityDto);

@@ -891,22 +891,7 @@ For this whole section, we utilized the solution from the owner's repo. https://
 
 === STARTING SECTION 10 part 91 & 92 — DTOs, Validation & Domain ID ===
 
-## What Changed in This Lesson
-
-### 1. Domain — ReactivityId replaces Title as the primary key
-
-`Domain/Reactivity.cs` previously used `Title` as the `[Key]`. This is bad practice because:
-
-- Business fields like titles are not guaranteed to be unique
-- Titles can change, which would break foreign key relationships
-
-Changed to a dedicated `ReactivityId` property that auto-generates a GUID server-side:
-
-```
-public string ReactivityId { get; set; } = Guid.NewGuid().ToString();
-```
-
-EF Core recognizes `ReactivityId` as the primary key by convention (`<TypeName>Id`), so `[Key]` is kept for explicitness but is technically redundant.
+## What Changed in This Lesson WITH DATA ANNOTATIONS NOT FLUENT VALIDATION
 
 After changing the domain model, a new EF Core migration is required since the database schema changed:
 
@@ -976,4 +961,96 @@ The `[Required]` approach gives per-field errors, which is far more useful for c
 
 These are data annotations — a simple validation approach. Fluent Validation is the more powerful alternative for complex rules but is not used here.
 
-=== STARTING SECTION 10 part 93 ===
+=== STARTING SECTION 10 part 93 — FluentValidation ===
+
+## What Changed in This Lesson
+
+Replaced `[Required]` data annotations on `CreateReactivityDto` with **FluentValidation** — a dedicated NuGet package that moves validation logic into its own class, separate from the DTO.
+
+---
+
+### Why Switch from Data Annotations to FluentValidation?
+
+| Scenario                                          | Use                              |
+| ------------------------------------------------- | -------------------------------- |
+| Simple CRUD with basic required/length rules      | Data Annotations — less overhead |
+| Complex business rules, conditional validation    | FluentValidation                 |
+| Need to unit test validation logic                | FluentValidation                 |
+| Cross-field validation (e.g. EndDate > StartDate) | FluentValidation                 |
+| Large team / production app                       | FluentValidation — scales better |
+
+---
+
+### 1. Install the NuGet Package
+
+Install `FluentValidation.DependencyInjectionExtensions` into `Application.csproj` — **no prerelease**.
+
+- Tutorial version: `11.11.0`
+- Latest at time of writing: `12.1.1`
+
+---
+
+### 2. Create the Validator (`Application/Reactivities/Validators/CreateReactivityValidator.cs`)
+
+A new dedicated class inheriting `AbstractValidator<T>` where `T` is the MediatR `Command` (not the DTO directly). Rules are defined with `RuleFor` + `.NotEmpty()` + `.WithMessage()`:
+
+```csharp
+RuleFor(x => x.ReactivityDto.Title).NotEmpty().WithMessage("Title is required");
+```
+
+The validator validates against the `Command` object (which wraps the DTO), so rules access fields via `x.ReactivityDto.PropertyName`.
+
+---
+
+### 3. Register the Validator in `Program.cs`
+
+Added one line to scan the `Application` assembly and register all validators automatically:
+
+```csharp
+builder.Services.AddValidatorsFromAssemblyContaining<CreateRectivityValidator>();
+```
+
+This means any new validator added to the `Application` project is picked up automatically — no need to register each one individually.
+
+---
+
+### 4. Inject and Call the Validator in `CreateReactivity.cs`
+
+The `Handler` constructor now receives `IValidator<Command>` via dependency injection:
+
+```csharp
+public class Handler(AppDbContext context, IMapper mapper, IValidator<Command> validator)
+```
+
+And validation runs before any database work:
+
+```csharp
+await validator.ValidateAndThrowAsync(request, cancellationToken);
+```
+
+If validation fails, `ValidateAndThrowAsync` throws a `FluentValidation.ValidationException` and halts execution — the entity is never created.
+
+---
+
+### 5. Remove `[Required]` from the DTO
+
+Since FluentValidation now owns all validation rules, the `[Required]` data annotations were removed from `CreateReactivityDto`. The DTO is now a plain data carrier with no validation attributes.
+
+---
+
+### Postman Result — Empty POST body returns 500
+
+At this stage the validation exception is a raw 500 because there is no global exception handler yet to convert it to a clean 400. The stack trace in the terminal shows:
+
+```
+FluentValidation.ValidationException: Validation failed:
+-- ReactivityDto.Title: Title is required Severity: Error
+-- ReactivityDto.Description: Description is required Severity: Error
+-- ReactivityDto.Category: Category is required Severity: Error
+-- ReactivityDto.City: City is required Severity: Error
+-- ReactivityDto.Venue: Venue is required Severity: Error
+```
+
+This confirms FluentValidation is working correctly — it's just not yet mapped to a proper HTTP error response. That will be handled in a future lesson with exception handling middleware.
+
+=== STARTING SECTION 10 part 94 ===
