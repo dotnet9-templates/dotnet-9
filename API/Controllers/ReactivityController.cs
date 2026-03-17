@@ -22,7 +22,7 @@ namespace API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Reactivity>> GetReactivityDetail(string id)
         {
-            return await Mediator.Send(new GetReactivityDetails.Query { ReactivityId = id });
+            return HandleResult(await Mediator.Send(new GetReactivityDetails.Query { ReactivityId = id }));
         }
 
         // POST api/reactivity — creates a new reactivity from the inbound DTO.

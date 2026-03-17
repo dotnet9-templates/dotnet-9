@@ -1,3 +1,4 @@
+using Application.Core;
 using Domain;
 using MediatR;
 using Persistence;
@@ -6,18 +7,20 @@ namespace Application.Queries
 {
     public class GetReactivityDetails
     {
-        public class Query : IRequest<Reactivity> 
+        public class Query : IRequest<Result<Reactivity>>
         {
             public required string ReactivityId { get; set; }
         }
 
-        public class Handler(AppDbContext context) : IRequestHandler<Query, Reactivity>
+        public class Handler(AppDbContext context) : IRequestHandler<Query, Result<Reactivity>>
         {
-            public async Task<Reactivity> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<Result<Reactivity>> Handle(Query request, CancellationToken cancellationToken)
             {
-                var reactivity = await context.Reactivities.FindAsync([request.ReactivityId], cancellationToken); // written this way to get rid of the ellipsis warning about cancellationToken.
-                if (reactivity == null) throw new Exception("Reactivity not found");
-                return reactivity;
+                var reactivity = await context.Reactivities.FindAsync([request.ReactivityId], cancellationToken);
+
+                if (reactivity == null) return Result<Reactivity>.Failure("Reactivity not found", 404);
+
+                return Result<Reactivity>.Success(reactivity);
             }
         }
     }

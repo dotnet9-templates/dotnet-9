@@ -1186,4 +1186,23 @@ after testing on postman, we get the following error:
 
 next is handling other API error responses.
 
-=== STARTING SECTION 10 part 96 ===
+=== STARTING SECTION 10 part 96, 97 ===
+
+For handlers!
+
+Solution for Core is from https://github.com/TryCatchLearn/Reactivities/blob/6555456b9510ad8ffbd208b29de131d6e8d3f364/Application/Core/Result.cs
+
+97 solution is here: https://github.com/TryCatchLearn/Reactivities/blob/6555456b9510ad8ffbd208b29de131d6e8d3f364/Application/Activities/Queries/GetActivityDetails.cs
+
+Base API which is needed later is from here: https://github.com/TryCatchLearn/Reactivities/blob/main/API/Controllers/BaseApiController.cs#L17
+
+Testing module 10 get: postman result is
+
+{
+"type": "https://tools.ietf.org/html/rfc9110#section-15.5.5",
+"title": "Not Found",
+"status": 404,
+"traceId": "00-ca3383e89bb8b62829d5cfa42602d4b3-e3e0bdd6a0986bea-00"
+}
+
+=== STARTING SECTION 10 part 98 ===
