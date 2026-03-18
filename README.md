@@ -1222,3 +1222,16 @@ lesson 99 has Ihost to know if running in development or production . . .
 lesson 100 has the validators . . . and I just used teh solutions at this point from the owner's repo. Just all the validators folders.
 
 lesson 101 hits the base files i.e. DTO bases...validators bases...etc.
+
+=== STARTING SECTION 10 part 102 ===
+
+Use TestErrors snippet from the course folder.
+
+Errors on page displaying under Errors button with no functioning buttons only a loading.
+
+client folder and install npm install react-toastify
+
+front end setup.
+axios interceptors. next
+
+=== STARTING SECTION 10 part 103 ===

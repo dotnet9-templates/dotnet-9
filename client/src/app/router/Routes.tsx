@@ -5,6 +5,7 @@ import ReactivityDashboard from "../../features/reactivities/dashboard/Reactivit
 import ReactivityForm from "../../features/reactivities/form/ReactivityForm";
 import ReactivityDetailPage from "../../features/reactivities/details/ReactivityDetailPage";
 import Counter from "../../features/counter/Counter";
+import TestErrors from "../../features/error/TestErrors";
 
 export const router = createBrowserRouter([
   {
@@ -17,6 +18,7 @@ export const router = createBrowserRouter([
       { path: "createActivity", element: <ReactivityForm key="create" /> },
       { path: "manage/:reactivityId", element: <ReactivityForm /> }, // edit reactivity form. must match the reactivityId in the ReactivityForm component. e.g. id vs reactivityId.
       { path: "counter", element: <Counter /> },
+      { path: "errors", element: <TestErrors /> },
     ],
   },
 ]);
