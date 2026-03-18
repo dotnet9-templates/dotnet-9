@@ -1234,4 +1234,12 @@ client folder and install npm install react-toastify
 front end setup.
 axios interceptors. next
 
-=== STARTING SECTION 10 part 103 ===
+=== STARTING SECTION 10 part 103 && 104 && 105 && 106 & 107 ===
+
+These parts are all about errors and how to handle them.
+
+updates to agent.ts to use react toastify and axios.
+
+how to fix toastify not working error in main.tsx...not needing min.
+
+=== STARTING SECTION 11 part 108 ===

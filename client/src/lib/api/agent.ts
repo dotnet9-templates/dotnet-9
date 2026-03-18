@@ -1,8 +1,8 @@
-// axios configuration file.
 import axios from "axios";
 import { store } from "../stores/store";
+import { toast } from "react-toastify";
+import { router } from "../../app/router/Routes";
 
-// promises can be rejected or resolved.
 const sleep = (delay: number) => {
   return new Promise((resolve) => {
     setTimeout(resolve, delay);
@@ -10,7 +10,7 @@ const sleep = (delay: number) => {
 };
 
 const agent = axios.create({
-  baseURL: import.meta.env.VITE_API_URL, // has to be written in this way because of the vite config.
+  baseURL: import.meta.env.VITE_API_URL,
 });
 
 agent.interceptors.request.use((config) => {
@@ -18,16 +18,46 @@ agent.interceptors.request.use((config) => {
   return config;
 });
 
-agent.interceptors.response.use(async (response) => {
-  try {
+agent.interceptors.response.use(
+  async (response) => {
     await sleep(1000);
-    return response;
-  } catch (error) {
-    console.log(error);
-    return Promise.reject(error);
-  } finally {
     store.uiStore.isIdle();
+    return response;
+  },
+  async (error) => {
+    await sleep(1000);
+    store.uiStore.isIdle();
+    const { data, status } = error.response;
+    switch (status) {
+      case 400:
+        if (data.errors) {
+          const modalStateErrors = [];
+          for (const key in data.errors) {
+            if (data.errors[key]) {
+              modalStateErrors.push(data.errors[key]);
+            }
+          }
+          throw modalStateErrors.flat();
+        } else {
+          toast.error(data);
+        }
+        break;
+      case 401:
+        toast.error("unauthorised");
+        break;
+      case 403:
+        toast.error("forbidden");
+        break;
+      case 404:
+        await router.navigate("/not-found");
+        break;
+      case 500:
+        router.navigate("/server-error", { state: { error: data } });
+        break;
+    }
+
+    return Promise.reject(error);
   }
-});
+);
 
 export default agent;
