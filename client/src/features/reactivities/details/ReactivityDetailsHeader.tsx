@@ -81,7 +81,7 @@ export default function ReactivityDetailsHeader({ reactivity }: Props) {
                 variant="contained"
                 color="primary"
                 component={Link}
-                to={`/manage/activityId`}
+                to={`/manage/${reactivity.reactivityId}`}
                 disabled={isCancelled}
               >
                 Manage Event

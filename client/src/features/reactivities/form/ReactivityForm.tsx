@@ -1,9 +1,11 @@
 import { Box, Button, Paper, TextField, Typography } from "@mui/material";
-import type { FormEvent } from "react";
 import { useReactivities } from "../../../lib/hooks/useReactivities";
-import { useNavigate, useParams } from "react-router";
+import { useParams } from "react-router";
+import { useForm, type FieldValues } from "react-hook-form";
+import { useEffect } from "react";
 
 export default function ReactivityForm() {
+  const { register, reset, handleSubmit } = useForm();
   const { reactivityId } = useParams(); // this will load the data from the API for the individual reactivity.
   const {
     updateReactivity,
@@ -11,26 +13,15 @@ export default function ReactivityForm() {
     reactivity,
     isLoadingReactivity,
   } = useReactivities(reactivityId);
-  const navigate = useNavigate();
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault(); // prevent the default form submission behavior in the browser.
-    const formData = new FormData(event.currentTarget);
-    const data: { [key: string]: FormDataEntryValue } = {};
-    formData.forEach((value, key) => {
-      data[key] = value;
-    });
+  useEffect(() => {
     if (reactivity) {
-      data.reactivityId = reactivity.reactivityId;
-      await updateReactivity.mutateAsync(data as unknown as Reactivity);
-      navigate(`/reactivities/${reactivity.reactivityId}`); // navigate to the detail page after updating.
-    } else {
-      await createReactivity.mutateAsync(data as unknown as Reactivity, {
-        onSuccess: (reactivityId) => {
-          navigate(`/reactivities/${reactivityId}`); // navigate to the detail page after creating.
-        },
-      });
+      reset(reactivity);
     }
+  }, [reactivity, reset]);
+
+  const OnSubmit = async (data: FieldValues) => {
+    console.log(data);
   };
 
   if (isLoadingReactivity) return <Typography>Loading . . . </Typography>;
@@ -47,31 +38,31 @@ export default function ReactivityForm() {
       </Typography>
       <Box
         component="form"
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmit(OnSubmit)}
         display="flex"
         flexDirection="column"
         gap={3}
       >
         {/* using reactivity.title just to use it. uncontrolled input. */}
         <TextField
-          name="title"
+          {...register("title")}
           label="Title"
           defaultValue={reactivity?.title}
         />
         <TextField
-          name="description"
+          {...register("description")}
           label="Description"
           defaultValue={reactivity?.description}
           multiline
           rows={3}
         />
         <TextField
-          name="category"
+          {...register("category")}
           label="Category"
           defaultValue={reactivity?.category}
         />
         <TextField
-          name="date"
+          {...register("date")}
           label="Date"
           type="date"
           defaultValue={
@@ -80,9 +71,13 @@ export default function ReactivityForm() {
               : new Date().toISOString().split("T")[0]
           } // this is to format the date to the ISO string format and automatically set the date in the input field.
         />
-        <TextField name="city" label="City" defaultValue={reactivity?.city} />
         <TextField
-          name="venue"
+          {...register("city")}
+          label="City"
+          defaultValue={reactivity?.city}
+        />
+        <TextField
+          {...register("venue")}
           label="Venue"
           defaultValue={reactivity?.venue}
         />

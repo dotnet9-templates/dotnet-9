@@ -1242,4 +1242,25 @@ updates to agent.ts to use react toastify and axios.
 
 how to fix toastify not working error in main.tsx...not needing min.
 
-=== STARTING SECTION 11 part 108 ===
+=== STARTING SECTION 11 part 108 or 109 ===
+
+intro and setting up react hook form.
+
+react-hook-form.com/get-started
+npm install react-hook-form in client folder.
+
+validate with Zod not Yup
+npm install @hookform/resolvers zod in client folder.
+in tutorial it was v 10.9.0 now it's 10.9.4
+don't really need to worry about the version to latest.
+
+so there's 3 installs in the client folder. react-hook-form, @hookform/resolvers, zod.
+
+in react hook form register function is used for submisision and validation.
+but the actual submission is handled by the handleSubmit function.
+
+reset needed side effect of useEffect to reset the form when the reactivity is loaded.
+
+at this point nothing is sent to the server. so you should see the data in the form in the console when creating and clicking submit.
+
+=== STARTING SECTION 11 part 110 ===
