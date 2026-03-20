@@ -1,10 +1,10 @@
-using System;
 using Domain;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Persistence;
 
-public class AppDbContext(DbContextOptions options) : DbContext(options)  //dbcontext options is the connection string from Program.cs line 9 - 11.
+public class AppDbContext(DbContextOptions options) : IdentityDbContext<User>(options)
 {
     public required DbSet<Reactivity> Reactivities { get; set; }
 }

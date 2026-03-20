@@ -1301,4 +1301,38 @@ react-leaflet.js.org/docs/start-installation in client folder:
 npm install leaflet react-leaflet
 npm install -D @types/leaflet
 
-=== STARTING SECTION 12 part 121 ===
+=== STARTING SECTION 12 part 121, 122 ===
+
+will be using cookie for identity.
+
+https://learn.microsoft.com/en-us/aspnet/core/security/authentication/identity-api-authorization?view=aspnetcore-10.0 this has been around since .net 8
+
+we are going to use the identity api authorization endpoints automatically.
+
+nuget package needed is Microsoft.AspNetCore.Identity.EntityFrameworkCore by @Microsoft because we will be using identity user in domain.
+Goes against a little bit of clean architecture principle..technically this will be separate from the application but
+this is tutorial and we will see how to use it.
+
+Install it in the Domain.
+in the tutorial he downloaded 9.0.1
+current version is 10.0.5 now
+
+use 9.0.11 ef core packages are pinned to 9.0.11 to match installed version.
+
+after updating domain and AppDbContext we need to update migrate in API you need to be outside the API folder...becase
+we need to be in the root folder to run the command.
+
+cd ..
+dotnet ef migrations add IdentityAdded -p Persistence -s API
+
+build should succeed
+
+new migration created in Persistence folder.
+
+cd back into API and dotnet watch will populate everything in the API folder.
+
+then go back to file exploreer click on reactivites.db and see the new tables in reactivities. also aspnetusers.
+
+next is configure in program.cs
+
+=== STARTING SECTION 12 part 123 ===
