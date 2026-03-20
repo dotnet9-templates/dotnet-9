@@ -1,5 +1,6 @@
 import { Card, Badge, CardMedia, Box, Typography, Button } from "@mui/material";
 import { Link } from "react-router";
+import { formatDate } from "../../../lib/util/util";
 
 type Props = {
   reactivity: Reactivity;
@@ -54,7 +55,9 @@ export default function ReactivityDetailsHeader({ reactivity }: Props) {
           <Typography variant="h4" sx={{ fontWeight: "bold" }}>
             {reactivity.title}
           </Typography>
-          <Typography variant="subtitle1">{reactivity.date}</Typography>
+          <Typography variant="subtitle1">
+            {formatDate(reactivity.date)}
+          </Typography>
           <Typography variant="subtitle2">
             Hosted by{" "}
             <Link

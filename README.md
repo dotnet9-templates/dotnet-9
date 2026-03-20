@@ -1263,4 +1263,24 @@ reset needed side effect of useEffect to reset the form when the reactivity is l
 
 at this point nothing is sent to the server. so you should see the data in the form in the console when creating and clicking submit.
 
-=== STARTING SECTION 11 part 110 ===
+=== STARTING SECTION 11 part 110, 111, 112, 113, 114, ===
+
+ReactivityForm solution from the owner's repo.
+
+Lesson 112 was the reusable text input.
+
+lesson 114: date pickers have different date calendars for different browsers with MUI.
+install MUI X Date and TIme Picker from mui.com/x/react-date-pickers
+
+npm install @mui/x-date-pickers in client folder.
+npm install date-fns in client folder.
+--didn't care about version for these...
+
+old: "@mui/x-date-pickers": "^8.24.0",
+New: "@mui/x-date-pickers": "^8.27.2",
+
+same: "date-fns": "^4.1.0",
+
+Localization Provider depends on the adapterdatefns. e.g. import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFnsV3';
+
+=== STARTING SECTION 11 part 115 ===
