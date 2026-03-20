@@ -1293,4 +1293,12 @@ this key is from his api key. free from his tutorial. just borrowing it.
 
 Submission must be in the future.
 
-=== STARTING SECTION 11 part 119 ===
+=== STARTING SECTION 11 part 119, 120 ===
+
+using leaflet map for the location view. The react version.
+react-leaflet.js.org/docs/start-installation in client folder:
+
+npm install leaflet react-leaflet
+npm install -D @types/leaflet
+
+=== STARTING SECTION 12 part 121 ===
