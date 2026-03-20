@@ -1283,4 +1283,14 @@ same: "date-fns": "^4.1.0",
 
 Localization Provider depends on the adapterdatefns. e.g. import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFnsV3';
 
-=== STARTING SECTION 11 part 115 ===
+=== STARTING SECTION 11 part 115, 116, 117, 118 ===
+
+Introduction to locationiq.com. For place autocompletion.
+
+    "https://api.locationiq.com/v1/autocomplete?key=pk.eac4765ae48c85d19b8b20a979534bf7&limit=5&dedupe=1&";
+
+this key is from his api key. free from his tutorial. just borrowing it.
+
+Submission must be in the future.
+
+=== STARTING SECTION 11 part 119 ===
