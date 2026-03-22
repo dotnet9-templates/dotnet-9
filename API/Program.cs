@@ -2,7 +2,9 @@ using API.Middleware;
 using Application.Core;
 using Application.Queries;
 using Application.Reactivities.Validators;
+using Domain;
 using FluentValidation;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
@@ -36,6 +38,12 @@ builder.Services.AddAutoMapper(cfg => cfg.AddProfile<MappingProfiles>());
 // ValidationBehavior can resolve them automatically.
 builder.Services.AddValidatorsFromAssemblyContaining<CreateReactivityValidator>();
 builder.Services.AddTransient<ExceptionMiddleware>(); // transient service is a service that is created once and then disposed of after use. Used when needed.
+builder.Services.AddIdentityApiEndpoints<User>(opt =>
+{
+    opt.User.RequireUniqueEmail = true;
+})
+.AddRoles<IdentityRole>()
+.AddEntityFrameworkStores<AppDbContext>();
 
 var app = builder.Build();
 
@@ -44,11 +52,13 @@ app.UseCors(options =>
     options.AllowAnyMethod()
            .AllowAnyHeader()
            .WithOrigins("http://localhost:3001", "https://localhost:3001"));
+app.UseAuthentication();
+app.UseAuthorization();
 
 // app.UseHttpsRedirection();
-// app.UseAuthorization();
 
 app.MapControllers();
+app.MapGroup("api").MapIdentityApi<User>();  // api/login
 
 // Apply any pending EF Core migrations and seed initial data at startup.
 // A scoped service provider is used so the DbContext is properly disposed after seeding.

@@ -1336,3 +1336,9 @@ then go back to file exploreer click on reactivites.db and see the new tables in
 next is configure in program.cs
 
 === STARTING SECTION 12 part 123 ===
+
+**\*\***\*\*\***\*\***IMPORTANT**\*\***\*\*\***\*\***
+since dotnet 8 we simplified process for identity.
+we need in the program build the service.
+
+=== STARTING SECTION 12 part 124 ===
