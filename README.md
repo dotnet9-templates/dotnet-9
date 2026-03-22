@@ -1362,4 +1362,8 @@ testing via cookies.
 === STARTING SECTION 12 part 127 ===
 Register method with testing. Important.
 
-=== STARTING SECTION 12 part 128 ===
+=== STARTING SECTION 12 part 128 and 129 ===
+
+continuation from previous lesson with answers. to get user info.
+
+=== STARTING SECTION 13 part 130 ===
