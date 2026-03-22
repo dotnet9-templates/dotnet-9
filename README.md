@@ -1353,3 +1353,10 @@ testing endpoints with MapIdentityApi<TUser> endpoint.
 interesting!
 
 we will be using Login user cookie approach. when we have the cookie.
+
+=== STARTING SECTION 12 part 126 ===
+
+Creating an authorization policy.
+testing via cookies.
+
+=== STARTING SECTION 12 part 127 ===
