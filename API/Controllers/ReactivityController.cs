@@ -2,6 +2,7 @@ using Application.Queries;
 using Application.Reactivities.Commands;
 using Application.Reactivities.DTOs;
 using Domain;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -14,6 +15,7 @@ namespace API.Controllers
             return await Mediator.Send(new GetReactivityList.Query());
         }
 
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<Reactivity>> GetReactivityDetail(string id)
         {

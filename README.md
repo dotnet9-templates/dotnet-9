@@ -1347,3 +1347,9 @@ Seeded users hardcoded bob, tom jane...successfully seeded they will be seen aft
 inside AspNetUsers, they will be there.
 
 === STARTING SECTION 12 part 125 ===
+
+testing endpoints with MapIdentityApi<TUser> endpoint.
+
+interesting!
+
+we will be using Login user cookie approach. when we have the cookie.
