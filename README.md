@@ -1360,3 +1360,6 @@ Creating an authorization policy.
 testing via cookies.
 
 === STARTING SECTION 12 part 127 ===
+Register method with testing. Important.
+
+=== STARTING SECTION 12 part 128 ===
