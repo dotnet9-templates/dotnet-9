@@ -1342,3 +1342,8 @@ since dotnet 8 we simplified process for identity.
 we need in the program build the service.
 
 === STARTING SECTION 12 part 124 ===
+
+Seeded users hardcoded bob, tom jane...successfully seeded they will be seen after putting dotnet watch
+inside AspNetUsers, they will be there.
+
+=== STARTING SECTION 12 part 125 ===
