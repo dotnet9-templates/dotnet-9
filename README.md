@@ -1399,4 +1399,23 @@ if (!reactivities || isPending) return <Typography>Loading...</Typography>;
 
 watch to see testing method.
 
-=== STARTING SECTION 13 part 135 ===
+=== STARTING SECTION 13 part 135 and 136 ===
+this is not security related . . . we do prevent them from getting data from API without them from getting authenticated. They need the cookie.
+if you're going to implement security do it on the API side.\*\*\*
+
+server side valiation on the backend. client side is a nice to have on the frontend.
+
+RequireAuth.tsx solution from the owner's repo and private routes solution from the owner's repo.
+testing will take you to login page. password will take you to dashobard and logout...any endpoint will take you to sign in. https://localhost:3001/createActivity from not login will take you there after login.
+
+part 136 is adding a register form...
+
+RegisterForm.tsx solution from the owner's repo.
+utils.ts solution from the owner's repo.
+index.d.ts solution from the owner's repo.
+. . . more solutions from the owner's repo.
+
+test create new user.
+duplicate email will not show error, user will not be created.
+
+=== STARTING SECTION 13 part 137 ===

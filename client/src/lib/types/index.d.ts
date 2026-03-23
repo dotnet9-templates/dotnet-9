@@ -75,6 +75,13 @@ type LocationIQSuggestion = {
   address: LocationIQAddress;
 };
 
+type User = {
+  id: string;
+  email: string;
+  displayName: string;
+  image?: string;
+};
+
 type LocationIQAddress = {
   name: string;
   house_number: string;
