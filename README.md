@@ -1372,3 +1372,19 @@ used solution from the owner's repo.
 
 updated the cors for missing credentials to use withCredentials.
 at this point able to see cookie in application console.
+
+=== STARTING SECTION 13 part 132 and 133 ===
+
+tanstack see ["user"] query in the application console.
+
+UserMenu.tsx solution from the owner's repo.
+
+you can manually remove the cookie in the application console. remove the cookie updates the navbar to show login and register.
+
+Part 133 is creating a user menu.
+
+user menu solution from the owner's repo.
+
+test by logout bob and redirection to homepage.
+
+=== STARTING SECTION 13 part 134 ===
