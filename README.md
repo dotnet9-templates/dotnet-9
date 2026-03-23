@@ -1418,4 +1418,10 @@ index.d.ts solution from the owner's repo.
 test create new user.
 duplicate email will not show error, user will not be created.
 
-=== STARTING SECTION 13 part 137 ===
+=== STARTING SECTION 13 part 137 and 138 ===
+
+testing user with same email will get a 400 bad request in network tab fetch/xhr
+solutions already inputted from the owner's repo.
+testing you should see the valdiations in the webpage too.
+
+138 is end of sections
