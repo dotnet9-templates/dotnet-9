@@ -4,22 +4,21 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import agent from "../api/agent";
 import { useLocation } from "react-router";
 
-// optional reactivityId to get individual reactivity.
 export const useReactivities = (reactivityId?: string) => {
   const queryClient = useQueryClient();
   const location = useLocation();
-  // curly braces are destructuring the data from the response.
-  // this is an array of reactivities.
+  const currentUser = queryClient.getQueryData(["user"]);
+
   const { data: reactivities, isPending } = useQuery({
     queryKey: ["reactivities"],
     queryFn: async () => {
       const response = await agent.get<Reactivity[]>("/reactivity");
       return response.data;
     },
-    enabled: !reactivityId && location.pathname === "/reactivities",
+    enabled:
+      !reactivityId && location.pathname === "/reactivities" && !!currentUser,
   });
 
-  // get reactivity by id i.e. individual reactivity.
   const { data: reactivity, isLoading: isLoadingReactivity } = useQuery({
     queryKey: ["reactivity", reactivityId],
     queryFn: async () => {
@@ -28,7 +27,7 @@ export const useReactivities = (reactivityId?: string) => {
       );
       return response.data;
     },
-    enabled: !!reactivityId, // only run the query if reactivityId is provided.
+    enabled: !!reactivityId && !!currentUser,
   });
 
   const updateReactivity = useMutation({
@@ -36,7 +35,7 @@ export const useReactivities = (reactivityId?: string) => {
       await agent.put("/reactivity", reactivity);
     },
     onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ["reactivities"] }); // query key is declared in the useQuery hook.
+      await queryClient.invalidateQueries({ queryKey: ["reactivities"] });
     },
   });
 

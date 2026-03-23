@@ -1388,3 +1388,15 @@ user menu solution from the owner's repo.
 test by logout bob and redirection to homepage.
 
 === STARTING SECTION 13 part 134 ===
+
+conditionally making queries...solution from the owner's repo.
+
+useReactivityList.tsx solution from the owner's repo.
+if (isLoading) return <Typography>Loading...</Typography>
+if (!activities) return <Typography>No activities found</Typography> // ← separate check
+same as
+if (!reactivities || isPending) return <Typography>Loading...</Typography>;
+
+watch to see testing method.
+
+=== STARTING SECTION 13 part 135 ===
