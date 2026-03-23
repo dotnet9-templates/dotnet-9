@@ -1366,4 +1366,9 @@ Register method with testing. Important.
 
 continuation from previous lesson with answers. to get user info.
 
-=== STARTING SECTION 13 part 130 ===
+=== STARTING SECTION 13 part 130, 131 ===
+
+used solution from the owner's repo.
+
+updated the cors for missing credentials to use withCredentials.
+at this point able to see cookie in application console.

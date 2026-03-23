@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Persistence
 {
-    public class dbInitializer
+    public class DbInitializer
     {
         public static async Task SeedData(AppDbContext context, UserManager<User> userManager)
         {

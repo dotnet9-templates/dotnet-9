@@ -57,6 +57,7 @@ app.UseMiddleware<ExceptionMiddleware>();
 app.UseCors(options =>
     options.AllowAnyMethod()
            .AllowAnyHeader()
+           .AllowCredentials()
            .WithOrigins("http://localhost:3001", "https://localhost:3001"));
 app.UseAuthentication();
 app.UseAuthorization();
@@ -76,7 +77,7 @@ try
     var context = services.GetRequiredService<AppDbContext>();
     var userManager = services.GetRequiredService<UserManager<User>>();
     await context.Database.MigrateAsync();
-    await dbInitializer.SeedData(context, userManager);
+    await DbInitializer.SeedData(context, userManager);
 }
 catch (Exception ex)
 {
